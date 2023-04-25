@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import DndProvider from "../../context/DndProvider";
 
 // Define the draggable items
 const items = [
@@ -50,6 +51,7 @@ export const DndBuilder = () => {
   };
 
   return (
+     <DndProvider>
      <div className="container mt-5 p-5 shadow back h-1/2 bg-green-300">
      <DragDropContext onDragEnd={handleOnDragEnd}>
        <div style={{ display: "flex", flex:0.3}}>
@@ -145,5 +147,6 @@ export const DndBuilder = () => {
        </div>
      </DragDropContext>
      </div>
+     </DndProvider>
    );
 }   
