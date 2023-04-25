@@ -11,6 +11,7 @@ import MasterTemplates from './MasterTemplates';
 import DisplayPages from './DisplayPages';
 import Page1 from './Page1';
 import Page2 from './Page2';
+import { DndBuilder } from './DndBuilder';
 
 const CreateNewTemplate = () => {
     return (
@@ -49,7 +50,7 @@ const CreateNewTemplate = () => {
                     </ul>
 
                     <Routes>
-                        <Route exact path="/Editor" element={<Editor />} />
+                        <Route exact path="/Editor" element={<DndBuilder />} />
                         <Route exact path="/Preview" element={<Preview />} />
                         <Route exact path="/Define" element={<Define />} />
                         <Route exact path="/Summary" element={<Summary />} />
