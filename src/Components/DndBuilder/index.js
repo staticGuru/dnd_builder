@@ -3,9 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // Define the draggable items
 const items = [
-  { id: "inputBox", content: "Input Box" },
+  { id: "question", content: "Question" },
   { id: "options", content: "Options" },
   { id: "submitButton", content: "Submit Button" },
+  { id: "image", content: "Image" },
+  { id: "textArea", content: "Text Area Section" },
 ];
 
 export const DndBuilder = () => {
@@ -15,6 +17,7 @@ export const DndBuilder = () => {
   // Function to handle drag and drop actions
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
+    console.log(result)
     const { source, destination } = result;
 
     // Reorder the items on the left section
@@ -58,12 +61,13 @@ export const DndBuilder = () => {
                style={{
                  background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
                  padding: 10,
-                 width: 200,
+                 width: 300,
                  minHeight: 300,
                }}
                {...provided.droppableProps}
              >
                <h3>Draggable Items</h3>
+               <div style={{display: "flex", flexDirection: "row",flexWrap:"wrap"}}>
                {leftItems.map((item, index) => (
                  <Draggable key={item.id} draggableId={item.id} index={index}>
                    {(provided, snapshot) => (
@@ -75,7 +79,9 @@ export const DndBuilder = () => {
                          userSelect: "none",
                          padding: 16,
                          margin: "0 0 8px 0",
+                         marginRight:"5px",
                          minHeight: "50px",
+                         width:"60px",
                          backgroundColor: snapshot.isDragging ? "#263B4A" : "#456C86",
                          color: "white",
                          ...provided.draggableProps.style,
@@ -86,6 +92,7 @@ export const DndBuilder = () => {
                    )}
                  </Draggable>
                ))}
+               </div>
                {provided.placeholder}
              </div>
            )}
@@ -124,6 +131,7 @@ export const DndBuilder = () => {
                          color: "white",
                          ...provided.draggableProps.style,
                        }}
+                       onClick={()=>console.log("conteent",item)}
                      >
                        {item.content}
                      </div>
