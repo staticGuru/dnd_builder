@@ -1,6 +1,7 @@
 import React from "react";
 import { DndState } from "../../context/DndProvider";
 import { QuestionTextEditor } from "../Editor/questionTextEditor";
+import { OptionTextEditor } from "../Editor/optionTextEditor";
 
 export function ElementEditor() {
   const { editableElement, setIsEditable } = DndState();
@@ -18,5 +19,6 @@ export function ElementEditor() {
 }
 function ElementChecker(ele) {
   if (ele.id.includes("question")) return <QuestionTextEditor />;
+  if (ele.id.includes("option")) return <OptionTextEditor />;
   return <div>Unwanted dropdown</div>;
 }

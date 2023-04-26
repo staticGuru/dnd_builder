@@ -12,7 +12,8 @@ const items = [
     content: "Options",
     defaultContent: "Options",
     optionKey: "B",
-    isCorrectOption: false,
+    selectedOption:"B",
+    isCorrectOption:false
   },
   { id: "submitButton-#1", content: "Submit Button", buttonText: "Submit" },
   { id: "image-#1", content: "Image", imageUrl: "" },
