@@ -3,10 +3,13 @@ import { DndState } from "../../context/DndProvider";
 import { QuestionTextEditor } from "../Editor/questionTextEditor";
 
 export function ElementEditor() {
-  const { editableElement } = DndState();
+  const { editableElement, setIsEditable } = DndState();
   return (
     <div className="bg-red-300">
-      <div className="bg-blue-400 cursor-pointer justify-center flex items-center">
+      <div
+        onClick={()=>setIsEditable(false)}
+        className="bg-blue-400 cursor-pointer justify-center flex items-center"
+      >
         close
       </div>
       {ElementChecker(editableElement)}
