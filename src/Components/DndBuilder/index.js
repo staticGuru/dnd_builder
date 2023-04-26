@@ -1,24 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import DndProvider from "../../context/DndProvider";
-
-// Define the draggable items
-const items = [
-  { id: "question", content: "Question" },
-  { id: "options", content: "Options" },
-  { id: "submitButton", content: "Submit Button" },
-  { id: "image", content: "Image" },
-  { id: "textArea", content: "Text Area Section" },
-];
+import DndProvider, { DndState } from "../../context/DndProvider";
+import { ElementEditor } from "./ElementEditor";
 
 export const DndBuilder = () => {
-  const [leftItems, setLeftItems] = useState(items);
-  const [rightItems, setRightItems] = useState([]);
-
+  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable } = DndState();
   // Function to handle drag and drop actions
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
-    console.log(result)
+    console.log(result);
     const { source, destination } = result;
 
     // Reorder the items on the left section
@@ -49,104 +39,128 @@ export const DndBuilder = () => {
       setRightItems(newRightItems);
     }
   };
+  function handleElementEditor(element){
+    setIsEditable(!isEditable)
+  }
 
   return (
-     <DndProvider>
-     <div className="container mt-5 p-5 shadow back h-1/2 bg-green-300">
-     <DragDropContext onDragEnd={handleOnDragEnd}>
-       <div style={{ display: "flex", flex:0.3}}>
-         {/* Left section for draggable items */}
-         <Droppable droppableId="left">
-           {(provided, snapshot) => (
-             <div
-               ref={provided.innerRef}
-               style={{
-                 background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
-                 padding: 10,
-                 width: 300,
-                 minHeight: 300,
-               }}
-               {...provided.droppableProps}
-             >
-               <h3>Draggable Items</h3>
-               <div style={{display: "flex", flexDirection: "row",flexWrap:"wrap"}}>
-               {leftItems.map((item, index) => (
-                 <Draggable key={item.id} draggableId={item.id} index={index}>
-                   {(provided, snapshot) => (
-                     <div
-                       ref={provided.innerRef}
-                       {...provided.draggableProps}
-                       {...provided.dragHandleProps}
-                       style={{
-                         userSelect: "none",
-                         padding: 16,
-                         margin: "0 0 8px 0",
-                         marginRight:"5px",
-                         minHeight: "50px",
-                         width:"60px",
-                         backgroundColor: snapshot.isDragging ? "#263B4A" : "#456C86",
-                         color: "white",
-                         ...provided.draggableProps.style,
-                       }}
-                     >
-                       {item.content}
-                     </div>
-                   )}
-                 </Draggable>
-               ))}
-               </div>
-               {provided.placeholder}
-             </div>
-           )}
-         </Droppable>
-   
-         {/* Right section for droppable items */}
-         <Droppable droppableId="right">
-           {(provided, snapshot) => (
-             <div
-               ref={provided.innerRef}
-               style={{
-                 background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
-                 padding: 10,
-                 width:"100%",
-                 minHeight: 300,
-                 display: "flex",
-                 flexDirection:"column",
-               //   flex:0.7
-               }}
-               {...provided.droppableProps}
-             >
-               <h3>Droppable Items</h3>
-               {rightItems.map((item, index) => (
-                 <Draggable key={item.id} draggableId={item.id} index={index}>
-                   {(provided, snapshot) => (
-                     <div
-                       ref={provided.innerRef}
-                       {...provided.draggableProps}
-                       {...provided.dragHandleProps}
-                       style={{
-                         userSelect: "none",
-                         padding: 16,
-                         margin: "0 0 8px 0",
-                         minHeight: "50px",
-                         backgroundColor: snapshot.isDragging ? "#263B4A" : "#456C86",
-                         color: "white",
-                         ...provided.draggableProps.style,
-                       }}
-                       onClick={()=>console.log("conteent",item)}
-                     >
-                       {item.content}
-                     </div>
-                   )}
-                 </Draggable>
-               ))}
-               {provided.placeholder}
-             </div>
-           )}
-         </Droppable>
-       </div>
-     </DragDropContext>
-     </div>
-     </DndProvider>
-   );
-}   
+    <div className="container mt-5 p-5 shadow back h-1/2 bg-green-300">
+    <div className="flex d-flex flex-1">
+    <div className={`w-full ${isEditable?"pointer-events-none opacity-60":""}`}>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <div style={{ display: "flex", flex: 0.3 }}>
+          {/* Left section for draggable items */}
+          <Droppable droppableId="left">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={{
+                  background: snapshot.isDraggingOver
+                    ? "lightblue"
+                    : "lightgrey",
+                  padding: 10,
+                  width: 300,
+                  minHeight: 300,
+                }}
+                {...provided.droppableProps}
+              >
+                <h3>Draggable Items</h3>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {leftItems.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            userSelect: "none",
+                            padding: 16,
+                            margin: "0 0 8px 0",
+                            marginRight: "5px",
+                            minHeight: "50px",
+                            width: "60px",
+                            backgroundColor: snapshot.isDragging
+                              ? "#263B4A"
+                              : "#456C86",
+                            color: "white",
+                            ...provided.draggableProps.style,
+                          }}
+                        >
+                          {item.content}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+
+          {/* Right section for droppable items */}
+          <Droppable droppableId="right">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={{
+                  background: snapshot.isDraggingOver
+                    ? "lightblue"
+                    : "lightgrey",
+                  padding: 10,
+                  width: "100%",
+                  minHeight: 300,
+                  display: "flex",
+                  flexDirection: "column",
+                  //   flex:0.7
+                }}
+                {...provided.droppableProps}
+              >
+                <h3>Droppable Items</h3>
+                {rightItems.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{
+                          userSelect: "none",
+                          padding: 16,
+                          margin: "0 0 8px 0",
+                          minHeight: "50px",
+                          backgroundColor: snapshot.isDragging
+                            ? "#263B4A"
+                            : "#456C86",
+                          color: "white",
+                          ...provided.draggableProps.style,
+                        }}
+                        onClick={()=>handleElementEditor(item)}
+                      >
+                        {item.content}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
+      </DragDropContext>
+      </div>
+      {isEditable && <ElementEditor/>}
+      </div>
+    </div>
+  );
+};
