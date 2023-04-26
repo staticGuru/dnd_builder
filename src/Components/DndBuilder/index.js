@@ -4,7 +4,7 @@ import DndProvider, { DndState } from "../../context/DndProvider";
 import { ElementEditor } from "./ElementEditor";
 
 export const DndBuilder = () => {
-  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable } = DndState();
+  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable,editableElement,setEditableElement } = DndState();
   // Function to handle drag and drop actions
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -41,6 +41,7 @@ export const DndBuilder = () => {
   };
   function handleElementEditor(element){
     setIsEditable(!isEditable)
+    setEditableElement(element);
   }
 
   return (

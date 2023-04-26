@@ -2,16 +2,27 @@ import { createContext, useContext, useState } from "react";
 
 const DndContext = createContext(null);
 const items = [
-  { id: "question-#1", content: "Question",questionText:"Where are you from?"},
-  { id: "option-#1", content: "Options",optionText:"india",optionKey:"B",isCorrectOption:false},
-  { id: "submitButton-#1", content: "Submit Button",buttonText:"Submit"},
-  { id: "image-#1", content: "Image",imageUrl:""},
-  { id: "textArea-#1", content: "Text Area Section",placeHolderText:"" },
+  {
+    id: "question-#1",
+    content: "Question",
+    questionText: "Where are you from?",
+  },
+  {
+    id: "option-#1",
+    content: "Options",
+    optionText: "india",
+    optionKey: "B",
+    isCorrectOption: false,
+  },
+  { id: "submitButton-#1", content: "Submit Button", buttonText: "Submit" },
+  { id: "image-#1", content: "Image", imageUrl: "" },
+  { id: "textArea-#1", content: "Text Area Section", placeHolderText: "" },
 ];
 const DndProvider = ({ children }) => {
   const [leftItems, setLeftItems] = useState(items);
   const [rightItems, setRightItems] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
+  const [editableElement, setEditableElement] = useState({});
   return (
     <DndContext.Provider
       value={{
@@ -21,6 +32,8 @@ const DndProvider = ({ children }) => {
         setRightItems,
         isEditable,
         setIsEditable,
+        editableElement,
+        setEditableElement,
       }}
     >
       {children}
