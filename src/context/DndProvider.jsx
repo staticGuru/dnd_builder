@@ -5,12 +5,12 @@ const items = [
   {
     id: "question-#1",
     content: "Question",
-    questionText: "Where are you from?",
+    defaultContent:"Question"
   },
   {
     id: "option-#1",
     content: "Options",
-    optionText: "india",
+    defaultContent: "Options",
     optionKey: "B",
     isCorrectOption: false,
   },
@@ -23,6 +23,13 @@ const DndProvider = ({ children }) => {
   const [rightItems, setRightItems] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const [editableElement, setEditableElement] = useState({});
+  function updateElementProperty(item,updatedItem){
+      const changedIndex=rightItems.findIndex((rightItem)=>rightItem.id ===item.id);
+      rightItems[changedIndex]=updatedItem;
+      setRightItems(rightItems);
+      setIsEditable(false);
+      setEditableElement({});
+  }
   return (
     <DndContext.Provider
       value={{
@@ -34,6 +41,7 @@ const DndProvider = ({ children }) => {
         setIsEditable,
         editableElement,
         setEditableElement,
+        updateElementProperty
       }}
     >
       {children}
