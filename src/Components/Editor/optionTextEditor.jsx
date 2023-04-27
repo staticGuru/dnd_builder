@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { DndState } from "../../context/DndProvider";
+import { EditorFooter } from "./editorFooter";
 
 export function OptionTextEditor() {
-  const { editableElement, updateElementProperty } = DndState();
+  const { editableElement, updateElementProperty, deleteElement } = DndState();
   const item = { ...editableElement };
   const [checked, setChecked] = useState(item.isCorrectOption);
-  const [value, setValue] = useState(item.content??item.defaultContent);
+  const [value, setValue] = useState(item.content ?? item.defaultContent);
   const [optionValue, setOptionValue] = useState(item.optionKey);
   function handleValueChange(event) {
     setValue(event.target.value);
@@ -18,6 +19,9 @@ export function OptionTextEditor() {
     item.optionKey = optionValue;
     item.isCorrectOption = checked;
     updateElementProperty(editableElement, item);
+  }
+  function handleDeleteActions() {
+    deleteElement(item);
   }
   return (
     <div>
@@ -51,9 +55,10 @@ export function OptionTextEditor() {
           />
         </div>
       </div>
-      <div className="cursor-pointer" onClick={saveChanges}>
-        Save
-      </div>
+      <EditorFooter
+        saveChanges={saveChanges}
+        handleDeleteActions={handleDeleteActions}
+      />
     </div>
   );
 }
