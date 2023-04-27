@@ -2,9 +2,14 @@ import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DndProvider, { DndState } from "../../context/DndProvider";
 import { ElementEditor } from "./ElementEditor";
+import { UniqueIdGenerator } from "../../utils/UniqueIdGenerator";
+import { SlideLists } from "./SlideLists";
 
 export const DndBuilder = () => {
-  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable,editableElement,setEditableElement } = DndState();
+  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable,activeSlide, setActiveSlide,exportedQuestionaire,setEditableElement } = DndState();
+  //  React.useEffect(()=>{
+  //   var rightItems=getAllRightItems[activeSlide]
+  //  },[setActiveSlide])
   // Function to handle drag and drop actions
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -14,8 +19,8 @@ export const DndBuilder = () => {
     // Reorder the items on the left section
     if (source.droppableId === "left" && destination.droppableId === "left") {
       const newItems = Array.from(leftItems);
-      const [removed] = newItems.splice(source.index, 1);
-      newItems.splice(destination.index, 0, removed);
+      const [draggedItem] = newItems.splice(source.index, 1);
+      newItems.splice(destination.index, 0, draggedItem);
       setLeftItems(newItems);
     }
 
@@ -23,21 +28,26 @@ export const DndBuilder = () => {
     if (source.droppableId === "left" && destination.droppableId === "right") {
       const newLeftItems = Array.from(leftItems);
       const newRightItems = Array.from(rightItems);
-      const [removed] = newLeftItems.splice(source.index, 1);
-      newRightItems.splice(destination.index, 0, removed);
+      const draggedItem = newLeftItems[source.index];
+      console.log("draggedItem",draggedItem);
+      const picedContent={...draggedItem};
+      newRightItems.splice(destination.index, 0, picedContent);
+      draggedItem.id=UniqueIdGenerator(draggedItem.id)
+      newLeftItems[source.index]=draggedItem;
       setLeftItems(newLeftItems);
-      setRightItems(newRightItems);
+      exportedQuestionaire[activeSlide]=newRightItems;
+      setRightItems(exportedQuestionaire);
     }
 
-    // Move the items from right to left section
-    if (source.droppableId === "right" && destination.droppableId === "left") {
-      const newLeftItems = Array.from(leftItems);
-      const newRightItems = Array.from(rightItems);
-      const [removed] = newRightItems.splice(source.index, 1);
-      newLeftItems.splice(destination.index, 0, removed);
-      setLeftItems(newLeftItems);
-      setRightItems(newRightItems);
-    }
+    // // Move the items from right to left section
+    // if (source.droppableId === "right" && destination.droppableId === "left") {
+    //   const newLeftItems = Array.from(leftItems);
+    //   const newRightItems = Array.from(rightItems);
+    //   const [draggedItem] = newRightItems.splice(source.index, 1);
+    //   newLeftItems.splice(destination.index, 0, draggedItem);
+    //   setLeftItems(newLeftItems);
+    //   setRightItems(newRightItems);
+    // }
   };
   function handleElementEditor(element){
     setIsEditable(!isEditable)
@@ -105,6 +115,7 @@ export const DndBuilder = () => {
                   ))}
                 </div>
                 {provided.placeholder}
+                <div className="cursor-pointer bg-green-400">ADD NEW SLIDES</div>
               </div>
             )}
           </Droppable>
@@ -160,7 +171,7 @@ export const DndBuilder = () => {
         </div>
       </DragDropContext>
       </div>
-      {isEditable && <ElementEditor/>}
+      {isEditable ? <ElementEditor/>:<SlideLists/>}
       </div>
     </div>
   );
