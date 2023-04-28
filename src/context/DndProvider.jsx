@@ -44,6 +44,11 @@ const DndProvider = ({ children }) => {
     setIsEditable(false);
     setEditableElement({});
   }
+  function addSlide(){
+    rightItems.push([]);
+    setRightItems(rightItems);
+    setActiveSlide(rightItems.length-1);
+  }
   return (
     <DndContext.Provider
       value={{
@@ -59,7 +64,8 @@ const DndProvider = ({ children }) => {
         deleteElement,
         activeSlide,
         setActiveSlide,
-        exportedQuestionaire:rightItems
+        exportedQuestionaire:rightItems,
+        addSlide
       }}
     >
       {children}
