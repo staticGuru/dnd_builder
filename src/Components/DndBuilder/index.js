@@ -6,7 +6,7 @@ import { UniqueIdGenerator } from "../../utils/UniqueIdGenerator";
 import { SlideLists } from "./SlideLists";
 
 export const DndBuilder = () => {
-  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable,activeSlide, setActiveSlide,exportedQuestionaire,setEditableElement } = DndState();
+  const { leftItems, rightItems, setRightItems, setLeftItems,isEditable,setIsEditable,activeSlide, addSlide,exportedQuestionaire,setEditableElement } = DndState();
   //  React.useEffect(()=>{
   //   var rightItems=getAllRightItems[activeSlide]
   //  },[setActiveSlide])
@@ -115,7 +115,7 @@ export const DndBuilder = () => {
                   ))}
                 </div>
                 {provided.placeholder}
-                <div className="cursor-pointer bg-green-400">ADD NEW SLIDES</div>
+                <div className="cursor-pointer bg-green-400" onClick={addSlide}>ADD NEW SLIDES</div>
               </div>
             )}
           </Droppable>
