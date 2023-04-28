@@ -17,13 +17,14 @@ export function QuestionTextEditor() {
     deleteElement(item);
   }
   return (
-    <div>
+    <div className="bg-blue-600 flex flex-1 flex-col d-flex h-full">
       <div>
-        <span>Question</span>
+        <span className="text-base text-black font-bold ml-2 mb-4">Question</span>
         <input
           placeholder="Enter question here"
           value={value}
           onChange={handleValueChange}
+          className="outline-none p-2 rounded-sm self-center ml-2"
         />
       </div>
       <EditorFooter

@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { BsPatchQuestion, BsImage } from "react-icons/bs";
+import { BiMessageDots } from "react-icons/bi";
 
 const DndContext = createContext(null);
 const items = [
@@ -6,6 +8,9 @@ const items = [
     id: "question-#1",
     content: "Question",
     defaultContent: "Question",
+    icon: (
+      <BsPatchQuestion size={32} style={{ marginTop: 10, marginBottom: 10 }} />
+    ),
   },
   {
     id: "option-#1",
@@ -14,10 +19,20 @@ const items = [
     optionKey: "B",
     selectedOption: "B",
     isCorrectOption: false,
+    icon: (
+      <BiMessageDots size={32} style={{ marginTop: 10, marginBottom: 10 }} />
+    ),
   },
-  { id: "submitButton-#1", content: "Submit Button", buttonText: "Submit" },
-  { id: "image-#1", content: "Image", imageUrl: "" },
-  { id: "textArea-#1", content: "Text Area Section", placeHolderText: "" },
+  // { id: "submitButton-#1", content: "Submit", buttonText: "Submit", icon:<BsPatchQuestion/> },
+  {
+    id: "image-#1",
+    content: "Image",
+    imageUrl: "",
+    width: "",
+    height: "",
+    icon: <BsImage size={32} style={{ marginTop: 10, marginBottom: 10 }} />,
+  },
+  // { id: "textArea-#1", content: "Text Area Section", placeHolderText: "" },
 ];
 const DndProvider = ({ children }) => {
   const [leftItems, setLeftItems] = useState(items);
@@ -39,22 +54,22 @@ const DndProvider = ({ children }) => {
     const deletedItems = rightItems[activeSlide].filter(
       (rightItem) => rightItem.id !== item.id
     );
-    rightItems[activeSlide]=deletedItems;
+    rightItems[activeSlide] = deletedItems;
     setRightItems(rightItems);
     setIsEditable(false);
     setEditableElement({});
   }
-  function addSlide(){
+  function addSlide() {
     rightItems.push([]);
     setRightItems(rightItems);
-    setActiveSlide(rightItems.length-1);
+    setActiveSlide(rightItems.length - 1);
   }
   return (
     <DndContext.Provider
       value={{
         leftItems,
         setLeftItems,
-        rightItems:rightItems[activeSlide],
+        rightItems: rightItems[activeSlide],
         setRightItems,
         isEditable,
         setIsEditable,
@@ -64,8 +79,8 @@ const DndProvider = ({ children }) => {
         deleteElement,
         activeSlide,
         setActiveSlide,
-        exportedQuestionaire:rightItems,
-        addSlide
+        exportedQuestionaire: rightItems,
+        addSlide,
       }}
     >
       {children}

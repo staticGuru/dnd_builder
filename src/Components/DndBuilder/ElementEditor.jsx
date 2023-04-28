@@ -7,10 +7,10 @@ import { ImageContentEditor } from "../Editor/ImageContentEditor";
 export function ElementEditor() {
   const { editableElement, setIsEditable } = DndState();
   return (
-    <div className="bg-red-300">
+    <div className="border-4 rounded-xl border-yellow-400 overflow-hidden bg-slate-200">
       <div
         onClick={()=>setIsEditable(false)}
-        className="bg-blue-400 cursor-pointer justify-center flex items-center"
+        className="bg-red-600 text-white text-base cursor-pointer justify-center flex items-center p-2 font-bold "
       >
         close
       </div>
