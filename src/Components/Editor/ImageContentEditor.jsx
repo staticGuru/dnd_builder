@@ -18,7 +18,7 @@ export function ImageContentEditor() {
     setHeight(e.target.value);
   }
   function saveChanges() {
-    item.content = url;
+    item.imageUrl = url;
     item.width = width;
     item.height = height;
     updateElementProperty(editableElement, item);
@@ -27,28 +27,36 @@ export function ImageContentEditor() {
     deleteElement(item);
   }
   return (
-    <div>
+    <div className="flex flex-1 flex-col d-flex h-full pb-4">
       <div className="flex flex-col">
-        <span>Option</span>
+        <span className="text-base text-black font-bold ml-2 mb-1">Option</span>
         <input
           placeholder="Enter image url"
           value={url}
           onChange={handleUrlChanges}
+          className="outline-none p-2 rounded-sm self-center ml-2"
+          style={{ marginLeft: "1rem", marginRight: "1rem" }}
         />
         <div>
-          <span>Width</span>
+          <span className="text-base text-black font-bold mb-1">
+            Width
+          </span>
           <input
             placeholder="Enter width of image"
             value={width}
             onChange={handleWidthChanges}
+            className="outline-none p-2 rounded-sm self-center ml-2"
+            style={{ marginLeft: "1rem", marginRight: "1rem" }}
           />
         </div>
         <div>
-          <span>Height</span>
+          <span className="text-base text-black font-bold  mb-1">Height</span>
           <input
             placeholder="Enter height of image"
             value={height}
             onChange={handleHeightChanges}
+            className="outline-none p-2 rounded-sm self-center ml-2"
+            style={{ marginLeft: "1rem", marginRight: "1rem" }}
           />
         </div>
       </div>
