@@ -4,7 +4,7 @@ import { DndState } from "../../context/DndProvider";
 export function SlideLists() {
   const { exportedQuestionaire, activeSlide, setActiveSlide } = DndState();
   return (
-    <div className="bg-slate-600 flex flex-col p-3 ">
+    <div className="bg-slate-600 flex flex-col p-3">
       {exportedQuestionaire.map((slide, index) => (
         <div
           key={index}
