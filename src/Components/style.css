@@ -87,8 +87,8 @@
 
 .RightSide_NavBar {
   height: 600px;
-  width: 200px;
-  background-color: #1e1e72;
+  width: 150px;
+  background-color: "transparent";
 }
 
 .step-menu {
