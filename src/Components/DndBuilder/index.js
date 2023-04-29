@@ -64,15 +64,15 @@ export const DndBuilder = () => {
   };
 
   return (
-    <div className="container mt-5 p-5 shadow back h-1/2 bg-green-300">
+    <div className="container p-5 mt-5 shadow back min-h-screen bg-[#FDF4F5]">
       <div className="flex d-flex flex-1">
         <div
-          className={`w-full ${
+          className={`w-full min-h-screen ${
             isEditable ? "pointer-events-none opacity-60" : ""
           }`}
         >
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            <div style={{ display: "flex", flex: 0.3 }}>
+            <div style={{ display: "flex"}} className="min-h-screen">
               {/* Left section for draggable items */}
               <Droppable droppableId="left">
                 {(provided, snapshot) => (
@@ -84,11 +84,11 @@ export const DndBuilder = () => {
                         : "#F1F6F9",
                       padding: 10,
                       width: 300,
-                      minHeight: 300,
+                      minHeight: 300
                     }}
                     {...provided.droppableProps}
                   >
-                    <h4>Draggable Items</h4>
+                    <h4 className="font-bold text-black text-base">Components</h4>
 
                     <div className="grid grid-cols-2 gap-2 mt-3 mb-5">
                       {leftItems.map((item, index) => (
@@ -131,12 +131,12 @@ export const DndBuilder = () => {
                       width: "100%",
                       minHeight: 300,
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: "column"
                       //   flex:0.7
                     }}
                     {...provided.droppableProps}
                   >
-                    <h3>Droppable Items</h3>
+                    <h4 className="font-bold text-black text-xl">Questionaire Builder</h4>
                     {rightItems.map((item, index) => (
                       <Draggable
                         key={item.id}
