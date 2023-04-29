@@ -17,7 +17,7 @@ export function QuestionTextEditor() {
     deleteElement(item);
   }
   return (
-    <div className="bg-blue-600 flex flex-1 flex-col d-flex h-full">
+    <div className="flex flex-1 flex-col d-flex h-full">
       <div>
         <span className="text-base text-black font-bold ml-2 mb-4">Question</span>
         <input
