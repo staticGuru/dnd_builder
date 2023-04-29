@@ -9,12 +9,12 @@ export function ElementEditor() {
   return (
     <div className="border-4 rounded-xl border-yellow-400 overflow-hidden bg-slate-200">
       <div
-        onClick={()=>setIsEditable(false)}
+        onClick={() => setIsEditable(false)}
         className="bg-red-600 text-white text-base cursor-pointer justify-center flex items-center p-2 font-bold "
       >
         close
       </div>
-      {ElementChecker(editableElement)}
+      <div className="pl-2 pr-2 bg-blue-600">{ElementChecker(editableElement)}</div>
     </div>
   );
 }
