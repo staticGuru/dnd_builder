@@ -53,6 +53,30 @@ export function DroppableItems({ provided, snapshot, item }) {
         <div style={{padding:16,paddingLeft:8}}>{item.content}</div>
       </div>
     );
+    if (item.id.includes("image"))
+    return (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        style={{
+          userSelect: "none",
+        display:"flex",
+        flexDirection:"row",
+          minHeight: "50px",
+          width: "80%",
+          alignSelf: "center",
+          overflow: "hidden",
+          backgroundColor: snapshot.isDragging ? "#263B4A" : "#F4EEE0",
+          color: "black",
+          ...provided.draggableProps.style,
+        }}
+        className="rounded-xl border-2 border-black font-semibold text-base"
+        onClick={() => handleElementEditor(item)}
+      >
+        <img alt="#" src={item.imageUrl} style={{width:`${item.width}px`,height:`${item.height}px`}}/>
+      </div>
+    );
   return (
     <div
       ref={provided.innerRef}
