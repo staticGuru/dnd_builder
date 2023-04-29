@@ -5,9 +5,9 @@ import { DndState } from "../../context/DndProvider";
 export function ImageContentEditor() {
   const { editableElement, updateElementProperty, deleteElement } = DndState();
   const item = { ...editableElement };
-  const [url, setUrl] = useState();
-  const [width, setWidth] = useState(20);
-  const [height, setHeight] = useState(20);
+  const [url, setUrl] = useState(item.imageUrl);
+  const [width, setWidth] = useState(item.width);
+  const [height, setHeight] = useState(item.height);
   function handleUrlChanges(e) {
     setUrl(e.target.value);
   }
@@ -18,16 +18,18 @@ export function ImageContentEditor() {
     setHeight(e.target.value);
   }
   function saveChanges() {
-    item.imageUrl = url;
-    item.width = width;
-    item.height = height;
+    item.imageUrl = url ?? "";
+    if (url) {
+      item.width = width;
+      item.height = height;
+    }
     updateElementProperty(editableElement, item);
   }
   function handleDeleteActions() {
     deleteElement(item);
   }
   return (
-    <div className="flex flex-1 flex-col d-flex h-full pb-4">
+    <div className="flex flex-1 flex-col d-flex min-h-screen pb-4">
       <div className="flex flex-col">
         <span className="text-base text-black font-bold ml-2 mb-1">Option</span>
         <input
@@ -38,9 +40,7 @@ export function ImageContentEditor() {
           style={{ marginLeft: "1rem", marginRight: "1rem" }}
         />
         <div>
-          <span className="text-base text-black font-bold mb-1">
-            Width
-          </span>
+          <span className="text-base text-black font-bold mb-1">Width</span>
           <input
             placeholder="Enter width of image"
             value={width}
