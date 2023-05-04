@@ -3,12 +3,19 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CreateNewCategory from '../Components/CreateNewCategory';
 import CreateNewTemplate from './CreateNewTemplate';
+import { DndState } from '../context/DndProvider';
 
 const Define = () => {
+    const {setTemplateData}=DndState();
     const [define, setDefine] = useState([]);
     const [category, setCategory] = useState([]);
     const [template, setTemplate] = useState([]);
     const [create, setCreate] = useState(false);
+   
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [que, setQue] = useState("");
+    const [description, setDescription] = useState("");
     const close = () => setDefine(false);
 
     const getQuestion = () => {
@@ -21,23 +28,20 @@ const Define = () => {
         getQuestion();
     }, [])
 
-    const [name, setName] = useState("");
-    const [type, setType] = useState("");
-    const [que, setQue] = useState("");
-    const [description, setDescription] = useState("");
 
     const saveTemplate = () => {
-        var url = "http://localhost:1234/template";
+        // var url = "http://localhost:1234/template";
         var templateData = {
             "name": name,
             "type": type,
             "que": que,
             "description": description,
         };
-        axios.post(url, templateData)
-            .then(response => {
-                alert("Your Template Saved Successfully");
-            })
+        setTemplateData(templateData)
+        // axios.post(url, templateData)
+        //     .then(response => {
+        //         alert("Your Template Saved Successfully");
+        //     })
     }
     return (
         <div>
@@ -86,12 +90,12 @@ const Define = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className='col-lg-3'>
+                     {/*   <div className='col-lg-3'>
                             <div className='mt-4'>
                                 {<button className="createbutton mt-4" onClick={() => setCreate(true)}>CREATE</button>}
                                 {create && <CreateNewCategory />}
                             </div>
-                        </div>
+                                </div>*/}
                     </div>
                     <div className='row'>
                         <div className='col-lg-7'>
