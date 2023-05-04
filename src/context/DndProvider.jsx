@@ -40,6 +40,7 @@ const DndProvider = ({ children }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [editableElement, setEditableElement] = useState({});
+  const [templateData, setTemplateData] = useState({});
 
   function updateElementProperty(item, updatedItem) {
     const changedIndex = rightItems[activeSlide].findIndex(
@@ -81,6 +82,8 @@ const DndProvider = ({ children }) => {
         setActiveSlide,
         exportedQuestionaire: rightItems,
         addSlide,
+        templateData,
+        setTemplateData,
       }}
     >
       {children}
