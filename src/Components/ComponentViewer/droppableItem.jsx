@@ -41,7 +41,7 @@ export function DroppableItems({ provided, snapshot, item }) {
           minHeight: "50px",
           width: "80%",
           alignSelf: "center",
-          marginTop:"10px",
+          marginTop: "10px",
           overflow: "hidden",
           backgroundColor: snapshot.isDragging ? "#263B4A" : "#F4EEE0",
           color: "black",
@@ -81,11 +81,47 @@ export function DroppableItems({ provided, snapshot, item }) {
         <img
           alt="#"
           src={item.imageUrl}
-          style={{ width: `${item.width ?? 80}px`, height: `${item.height ??80}px` }}
+          style={{
+            width: `${item.width ?? 80}px`,
+            height: `${item.height ?? 80}px`,
+          }}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null; // prevents looping
-            currentTarget.src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg";
+            currentTarget.src =
+              "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg";
           }}
+        />
+      </div>
+    );
+  if (item.id.includes("textArea"))
+    return (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        style={{
+          userSelect: "none",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "150px",
+          width: "90%",
+          marginTop: "8px",
+          marginBottom: "8px",
+          alignSelf: "center",
+          overflow: "hidden",
+          backgroundColor: snapshot.isDragging ? "#263B4A" : "transparent",
+          color: "black",
+          ...provided.draggableProps.style,
+        }}
+        className="font-semibold text-base cursor-pointer" 
+        onClick={() => handleElementEditor(item)}
+      >
+        {/*<label className="pl-2 mb-2 font-normal text-sm">{item.label}</label>*/}
+        <input
+          type="textarea"
+          name="textValue"
+          placeholder={item.placeHolderText}
+          className="flex flex-1 max-h-80 border-2 border-gray-300 rounded-md p-3 cursor-pointer"
         />
       </div>
     );
