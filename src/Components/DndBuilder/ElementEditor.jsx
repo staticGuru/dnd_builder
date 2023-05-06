@@ -3,6 +3,8 @@ import { DndState } from "../../context/DndProvider";
 import { QuestionTextEditor } from "../Editor/questionTextEditor";
 import { OptionTextEditor } from "../Editor/optionTextEditor";
 import { ImageContentEditor } from "../Editor/ImageContentEditor";
+import { TextAreaEditor } from "../Editor/textAreaEditor";
+
 
 export function ElementEditor() {
   const { editableElement, setIsEditable } = DndState();
@@ -22,6 +24,7 @@ function ElementChecker(ele) {
   if (ele.id.includes("question")) return <QuestionTextEditor />;
   if (ele.id.includes("option")) return <OptionTextEditor />;
   if (ele.id.includes("image")) return <ImageContentEditor />;
+  if (ele.id.includes("textArea")) return <TextAreaEditor />;
 
   return <div>Unwanted dropdown</div>;
 }
