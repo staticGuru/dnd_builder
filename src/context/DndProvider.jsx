@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { BsPatchQuestion, BsImage } from "react-icons/bs";
+import { BsPatchQuestion, BsImage,BsBodyText } from "react-icons/bs";
 import { BiMessageDots } from "react-icons/bi";
 
 const DndContext = createContext(null);
@@ -32,7 +32,12 @@ const items = [
     height: "",
     icon: <BsImage size={32} style={{ marginTop: 10, marginBottom: 10 }} />,
   },
-  // { id: "textArea-#1", content: "Text Area Section", placeHolderText: "" },
+  {
+    id: "textArea-#1",
+    content: "Text Area",
+    placeHolderText: "Share your thoughts...",
+    icon: <BsBodyText size={32} style={{ marginTop: 10, marginBottom: 10 }} />,
+  },
 ];
 const DndProvider = ({ children }) => {
   const [leftItems, setLeftItems] = useState(items);
