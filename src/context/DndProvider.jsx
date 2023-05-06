@@ -35,6 +35,7 @@ const items = [
   {
     id: "textArea-#1",
     content: "Text Area",
+    label:"Text Area",
     placeHolderText: "Share your thoughts...",
     icon: <BsBodyText size={32} style={{ marginTop: 10, marginBottom: 10 }} />,
   },
@@ -46,6 +47,7 @@ const DndProvider = ({ children }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [editableElement, setEditableElement] = useState({});
   const [templateData, setTemplateData] = useState({});
+  const [isPublished,setIsPublished] = useState(false);
 
   function updateElementProperty(item, updatedItem) {
     const changedIndex = rightItems[activeSlide].findIndex(
@@ -88,7 +90,7 @@ const DndProvider = ({ children }) => {
         exportedQuestionaire: rightItems,
         addSlide,
         templateData,
-        setTemplateData,
+        setTemplateData,isPublished,setIsPublished
       }}
     >
       {children}
