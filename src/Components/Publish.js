@@ -15,7 +15,6 @@ const Publish = () => {
       uniqueId +
       "?qu=" +
       JSON.stringify(exportedQuestionaire);
-    console.log("URLLL", URL);
     return URL;
   };
   return (
@@ -42,9 +41,13 @@ const Publish = () => {
         <div className="col-lg-10">
           <div className="text-center">
             <button
-              className="createbutton offset-2"
+              className={`createbutton offset-2 ${
+                exportedQuestionaire.flat().length
+                  ? "opacity-100"
+                  : "opacity-50"
+              }`}
               onClick={() => setPublish(!publish)}
-              
+              disabled={exportedQuestionaire.flat().length ? false : true}
             >
               Publish
             </button>
