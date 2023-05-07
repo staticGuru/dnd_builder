@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
+import { DndState } from "../../context/DndProvider";
 
 export function Publisher() {
-     return (
-    <div>Publisher</div>
-  )
+  const { currentQuestionaire } = DndState();
+  console.log("currentQuestionaire", currentQuestionaire);
+  return <div>Publisher</div>;
 }
