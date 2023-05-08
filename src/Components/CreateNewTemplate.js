@@ -17,19 +17,20 @@ import { Publisher } from "./Publisher";
 import { DndState } from "../context/DndProvider";
 
 const CreateNewTemplate = () => {
-  const { setIsPublished, isPublished } = DndState();
+  const { setIsPublished, isPublished,setCurrentQuestionaire } = DndState();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   useEffect(() => {
     let text = urlParams.get("qu");
     if (text) {
+      setCurrentQuestionaire(text)
       setIsPublished(true);
     } else {
+      setCurrentQuestionaire("")
       setIsPublished(false);
     }
   }, [urlParams]);
-  console.log("setIsPublished000", isPublished);
   return (
     <div className="container mt-1">
       {!isPublished && (
@@ -86,8 +87,8 @@ const CreateNewTemplate = () => {
             </ul>
 
             <Routes>
-              <Route exact path="/Editor" element={<DndBuilder />} />
-              <Route exact path="/Preview" element={<PreviewContainer />} />
+              <Route exact path="/Editor" element={<Editor />} />
+              <Route exact path="/Preview" element={<Preview />} />
               <Route exact path="/Define" element={<Define />} />
               <Route exact path="/Summary" element={<Summary />} />
               <Route exact path="/Publish" element={<Publish />} />
