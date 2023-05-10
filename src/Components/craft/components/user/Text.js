@@ -28,6 +28,7 @@ export const Text = ({ text, fontSize, textAlign, ...props }) => {
       {...props}
       ref={(ref) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
+      style={{width:"fit-content"}}
     >
       <ContentEditable
         html={text}
@@ -40,7 +41,7 @@ export const Text = ({ text, fontSize, textAlign, ...props }) => {
           )
         }
         tagName="p"
-        style={{ fontSize: `${fontSize}px`, textAlign }}
+        style={{ fontSize: `${fontSize}px`, textAlign,outline:"none" }}
       />
     </div>
   );
