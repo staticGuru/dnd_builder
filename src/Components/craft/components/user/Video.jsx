@@ -119,7 +119,6 @@ export const Video = ({ src, width, height }) => {
       ref={connect}
       width={width}
       height={height}
-      
       boxShadow={selected ? 'md' : 'sm'}
       p={2}
       borderRadius={2}
@@ -139,14 +138,7 @@ export const VideoSettings = () => {
     props: node.data.props,
   }));
 
-  const handleWidthChange = (value) => {
-     console.log("valueee",value)
-    setProp((props) => (props.width = `${value}px`));
-  };
-
-  const handleHeightChange = (value) => {
-    setProp((props) => (props.height = `${value}px`));
-  };
+ 
 
   const handleSrcChange = (e) => {
     setProp((props) => (props.src = e.target.value));
@@ -174,26 +166,7 @@ export const VideoSettings = () => {
       onChange={(e) => setProp((props) => (props.height = parseInt(e.target.value)))}
       id="video-height"
     />
-     {/* <FormLabel mt={4}>Width</FormLabel>
-      <Slider defaultValue={parseInt(props.width)} min={0} max={600} onChange={handleWidthChange}>
-        <Slider.Track />
-        <Slider.Thumb />
-      </Slider>
-      <Box justifyContent="space-between">
-        <FormLabel>0px</FormLabel>
-        <FormLabel>{`${props.width}px`}</FormLabel>
-        <FormLabel>600px</FormLabel>
-  </Box>
-      <FormLabel mt={4}>Height</FormLabel>
-      <Slider defaultValue={parseInt(props.height)} min={0} max={600} onChange={handleHeightChange}>
-        <Slider.Track />
-        <Slider.Thumb />
-      </Slider>
-      <Box justifyContent="space-between">
-        <FormLabel>0px</FormLabel>
-        <FormLabel>{`${props.height}px`}</FormLabel>
-        <FormLabel>600px</FormLabel>
-      </Box>*/}
+   
     </FormControl>
   );
 };
