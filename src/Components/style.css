@@ -328,3 +328,18 @@ Link:hover {
 .gjs-editor{
   height:620px;
 }
+.sidebar-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 80px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ccc;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
