@@ -13,12 +13,14 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import { Button } from "./user/Button";
 import { Card } from "./user/Card";
 import { Container } from "./user/Container";
 import { Text } from "./user/Text";
 import {ImageContent} from "./user/ImageContent";
 import { Video } from "./user/Video";
+import { DocumentAttachment } from "./user/DocumentAttachment";
 
 export const Toolbox = () => {
   const { connectors } = useEditor();
@@ -107,6 +109,25 @@ export const Toolbox = () => {
               <span>Video</span>
             </Box>
           </Grid>
+          <Grid item xs={6}>
+          <Box
+            ref={(ref) =>
+              connectors.create(ref, <DocumentAttachment />)
+            }
+            variant="contained"
+            data-cy="toolbox-text"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer"
+            }}
+          >
+            <AttachFileOutlinedIcon />
+            <span>Document</span>
+          </Box>
+        </Grid>
             <Grid item xs={6}>
               <MaterialButton
                 ref={(ref) =>
