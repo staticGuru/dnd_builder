@@ -10,6 +10,7 @@
     "@material-ui/core": "^4.12.4",
     "axios": "^1.3.6",
     "bootstrap": "^5.2.3",
+    "copy-to-clipboard": "^3.3.3",
     "grapesjs": "^0.20.4",
     "grapesjs-blocks-basic": "^1.0.1",
     "grapesjs-carousel": "^1.0.0",
