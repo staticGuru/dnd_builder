@@ -11,6 +11,8 @@ import { Card, CardBottom, CardTop } from "./components/user/Card";
 import { Container } from "./components/user/Container";
 import { Text } from "./components/user/Text";
 import { Video } from "./components/user/Video";
+import { DocumentAttachment } from "./components/user/DocumentAttachment";
+
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,6 +35,7 @@ export default function QuestionnaireEditor() {
           CardBottom,
           ImageContent,
           Video,
+          DocumentAttachment
         }}
       >
         <Topbar />
