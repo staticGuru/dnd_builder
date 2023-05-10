@@ -17,7 +17,8 @@ import { Button } from "./user/Button";
 import { Card } from "./user/Card";
 import { Container } from "./user/Container";
 import { Text } from "./user/Text";
-import ImageContent from "./user/ImageContent";
+import {ImageContent} from "./user/ImageContent";
+import { Video } from "./user/Video";
 
 export const Toolbox = () => {
   const { connectors } = useEditor();
@@ -87,6 +88,25 @@ export const Toolbox = () => {
                 <span>Image</span>
               </Box>
             </Grid>
+            <Grid item xs={6}>
+            <Box
+              ref={(ref) =>
+                connectors.create(ref, <Video />)
+              }
+              variant="contained"
+              data-cy="toolbox-text"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer"
+              }}
+            >
+              <ImageOutlinedIcon />
+              <span>Video</span>
+            </Box>
+          </Grid>
             <Grid item xs={6}>
               <MaterialButton
                 ref={(ref) =>

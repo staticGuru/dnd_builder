@@ -6,10 +6,11 @@ import { SettingsPanel } from "./components/SettingsPanel";
 import { Toolbox } from "./components/Toolbox";
 import { Topbar } from "./components/Topbar";
 import { Button } from "./components/user/Button";
-import ImageContent from "./components/user/ImageContent";
+import { ImageContent } from "./components/user/ImageContent";
 import { Card, CardBottom, CardTop } from "./components/user/Card";
 import { Container } from "./components/user/Container";
 import { Text } from "./components/user/Text";
+import { Video } from "./components/user/Video";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,7 +31,8 @@ export default function QuestionnaireEditor() {
           Container,
           CardTop,
           CardBottom,
-          ImageContent
+          ImageContent,
+          Video,
         }}
       >
         <Topbar />
