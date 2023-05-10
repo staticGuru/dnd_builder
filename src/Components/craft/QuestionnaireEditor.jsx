@@ -6,6 +6,7 @@ import { SettingsPanel } from "./components/SettingsPanel";
 import { Toolbox } from "./components/Toolbox";
 import { Topbar } from "./components/Topbar";
 import { Button } from "./components/user/Button";
+import ImageContent from "./components/user/ImageContent";
 import { Card, CardBottom, CardTop } from "./components/user/Card";
 import { Container } from "./components/user/Container";
 import { Text } from "./components/user/Text";
@@ -29,6 +30,7 @@ export default function QuestionnaireEditor() {
           Container,
           CardTop,
           CardBottom,
+          ImageContent
         }}
       >
         <Topbar />
@@ -47,7 +49,7 @@ export default function QuestionnaireEditor() {
                 background="#eeeeee"
                 data-cy="root-container"
               >
-                <Card data-cy="frame-card" />
+                {/*<Card data-cy="frame-card" />
                 <Button text="Click me" size="small" data-cy="frame-button" />
                 <Text fontSize={20} text="Hi world!" data-cy="frame-text" />
                 <Element
@@ -62,13 +64,12 @@ export default function QuestionnaireEditor() {
                     text="It's me again!"
                     data-cy="frame-container-text"
                   />
-                </Element>
+     </Element>*/}
               </Element>
             </Frame>
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.root}>
-              <Toolbox />
               <SettingsPanel />
             </Paper>
           </Grid>
