@@ -1,5 +1,5 @@
 import { Editor, Frame, Element } from "@craftjs/core";
-import { Typography, Paper, Grid, makeStyles } from "@material-ui/core";
+import { Typography, Paper, Grid, makeStyles, Box } from "@material-ui/core";
 import React from "react";
 
 import { SettingsPanel } from "./components/SettingsPanel";
@@ -12,7 +12,8 @@ import { Container } from "./components/user/Container";
 import { Text } from "./components/user/Text";
 import { Video } from "./components/user/Video";
 import { DocumentAttachment } from "./components/user/DocumentAttachment";
-
+import { SlideLists } from "../DndBuilder/SlideLists";
+import { DndState } from "../../context/DndProvider";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles(() => ({
 }));
 export default function QuestionnaireEditor() {
   const classes = useStyles();
+  const { isEditable, addSlide } = DndState();
 
   return (
     <div style={{ width: "100%", marginTop: "6rem" }}>
@@ -35,7 +37,7 @@ export default function QuestionnaireEditor() {
           CardBottom,
           ImageContent,
           Video,
-          DocumentAttachment
+          DocumentAttachment,
         }}
       >
         <Topbar />
@@ -43,6 +45,18 @@ export default function QuestionnaireEditor() {
           <Grid item xs={3}>
             <Paper className={classes.root}>
               <Toolbox />
+              <Box
+                onClick={addSlide}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+
+                }}
+                py={1}
+              >
+                <Typography style={{fontWeight:"bold"}}>ADD NEW SLIDES</Typography>
+              </Box>
             </Paper>
           </Grid>
           <Grid item xs>
@@ -76,6 +90,7 @@ export default function QuestionnaireEditor() {
           <Grid item xs={3}>
             <Paper className={classes.root}>
               <SettingsPanel />
+              {!isEditable && <SlideLists />}
             </Paper>
           </Grid>
         </Grid>
