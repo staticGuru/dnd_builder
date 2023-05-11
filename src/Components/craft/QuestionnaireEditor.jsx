@@ -90,7 +90,7 @@ export default function QuestionnaireEditor() {
           <Grid item xs={3}>
             <Paper className={classes.root}>
               <SettingsPanel />
-              {!isEditable && <SlideLists />}
+              {!isEditable && <SlideLists isPreviewScreen={false}/>}
             </Paper>
           </Grid>
         </Grid>
