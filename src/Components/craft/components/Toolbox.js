@@ -12,13 +12,15 @@ import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
-import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
-import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
+import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
+import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
 import { Button } from "./user/Button";
 import { Card } from "./user/Card";
 import { Container } from "./user/Container";
 import { Text } from "./user/Text";
-import {ImageContent} from "./user/ImageContent";
+import { ImageContent } from "./user/ImageContent";
 import { Video } from "./user/Video";
 import { DocumentAttachment } from "./user/DocumentAttachment";
 
@@ -64,7 +66,7 @@ export const Toolbox = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <QuestionAnswerOutlinedIcon />
@@ -73,9 +75,7 @@ export const Toolbox = () => {
             </Grid>
             <Grid item xs={6}>
               <Box
-                ref={(ref) =>
-                  connectors.create(ref, <ImageContent />)
-                }
+                ref={(ref) => connectors.create(ref, <ImageContent />)}
                 variant="contained"
                 data-cy="toolbox-text"
                 style={{
@@ -83,7 +83,7 @@ export const Toolbox = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <ImageOutlinedIcon />
@@ -91,45 +91,41 @@ export const Toolbox = () => {
               </Box>
             </Grid>
             <Grid item xs={6}>
-            <Box
-              ref={(ref) =>
-                connectors.create(ref, <Video />)
-              }
-              variant="contained"
-              data-cy="toolbox-text"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer"
-              }}
-            >
-              <ImageOutlinedIcon />
-              <span>Video</span>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-          <Box
-            ref={(ref) =>
-              connectors.create(ref, <DocumentAttachment />)
-            }
-            variant="contained"
-            data-cy="toolbox-text"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer"
-            }}
-          >
-            <AttachFileOutlinedIcon />
-            <span>Document</span>
-          </Box>
-        </Grid>
+              <Box
+                ref={(ref) => connectors.create(ref, <Video />)}
+                variant="contained"
+                data-cy="toolbox-text"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <ImageOutlinedIcon />
+                <span>Video</span>
+              </Box>
+            </Grid>
             <Grid item xs={6}>
-              <MaterialButton
+              <Box
+                ref={(ref) => connectors.create(ref, <DocumentAttachment />)}
+                variant="contained"
+                data-cy="toolbox-text"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <AttachFileOutlinedIcon />
+                <span>Document</span>
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box
                 ref={(ref) =>
                   connectors.create(
                     ref,
@@ -138,18 +134,34 @@ export const Toolbox = () => {
                 }
                 variant="contained"
                 data-cy="toolbox-container"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
               >
-                Container
-              </MaterialButton>
+                <ContentPasteOutlinedIcon />
+                <span>Container</span>
+              </Box>
             </Grid>
             <Grid item xs={6}>
-              <MaterialButton
+              <Box
                 ref={(ref) => connectors.create(ref, <Card />)}
                 variant="contained"
                 data-cy="toolbox-card"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
               >
-                Card
-              </MaterialButton>
+              <CardMembershipOutlinedIcon/>
+                <span>Card</span>
+              </Box>
             </Grid>
           </Grid>
         </AccordionDetails>
