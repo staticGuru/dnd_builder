@@ -16,6 +16,7 @@ import { PreviewContainer } from "./DndPreviewer/PreviewContainer";
 import { Publisher } from "./Publisher";
 import { DndState } from "../context/DndProvider";
 import QuestionnaireEditor from "./craft/QuestionnaireEditor";
+import { CraftPreviewer } from "./craft/craftPreviewer";
 
 const CreateNewTemplate = () => {
   const { setIsPublished, isPublished,setCurrentQuestionaire } = DndState();
@@ -89,7 +90,7 @@ const CreateNewTemplate = () => {
 
             <Routes>
               <Route exact path="/Editor" element={<QuestionnaireEditor />} />
-              <Route exact path="/Preview" element={<Preview />} />
+              <Route exact path="/Preview" element={<CraftPreviewer />} />
               <Route exact path="/Define" element={<Define />} />
               <Route exact path="/Summary" element={<Summary />} />
               <Route exact path="/Publish" element={<Publish />} />
