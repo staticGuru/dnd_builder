@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DndState } from "../../context/DndProvider";
 import { useEditor } from "@craftjs/core";
 
-export function SlideLists() {
+export function SlideLists({isPreviewScreen}) {
   const { exportedQuestionaire, activeSlide, setActiveSlide } = DndState();
-  const {actions}=useEditor();
-  function changeActiveSlide(index){
+  const { actions } = useEditor();
+  function changeActiveSlide(index) {
     setActiveSlide(index);
-    let JsonObj=exportedQuestionaire[index].json
-    console.log({JsonObj})
-    actions.deserialize(JsonObj)
+    let JsonObj = exportedQuestionaire[index].json;
+    console.log({ JsonObj });
+    actions.deserialize(JsonObj);
   }
+  useEffect(() => {
+    if (isPreviewScreen) {
+      actions.setOptions((props) => (props.enabled = false));
+    }
+    console.log("isPreViewScreennnnn",isPreviewScreen)
+  }, [isPreviewScreen]);
   return (
     <div className="bg-slate-100 flex flex-col p-3">
       {exportedQuestionaire.map((slide, index) => (
