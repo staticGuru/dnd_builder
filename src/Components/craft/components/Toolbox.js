@@ -1,4 +1,4 @@
-import { useEditor, Element } from "@craftjs/core";
+import { useEditor, Element, useNode } from "@craftjs/core";
 import {
   Box,
   Typography,
@@ -15,7 +15,7 @@ import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlin
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
 import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
-import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
+import CardMembershipOutlinedIcon from "@mui/icons-material/CardMembershipOutlined";
 import { Button } from "./user/Button";
 import { Card } from "./user/Card";
 import { Container } from "./user/Container";
@@ -23,10 +23,32 @@ import { Text } from "./user/Text";
 import { ImageContent } from "./user/ImageContent";
 import { Video } from "./user/Video";
 import { DocumentAttachment } from "./user/DocumentAttachment";
+import { Option } from "./user/Option";
+import { plainThemeColors } from "../utils/colors";
+import ColorTheme from "./ToolItems/Theme";
+import { DndState } from "../../../context/DndProvider";
 
 export const Toolbox = () => {
   const { connectors } = useEditor();
+  const { themeArr, setThemeArr, activeSlide,rightItems } = DndState();
+  // const {
+  //   actions: { setProp },
+  // } = useNode();
+  function changeBackground(code) {
+    // themeArr[activeSlide] = code;
+    // setThemeArr(code);
+    // console.log("Guruvignessss", themeArr,rightItems);
+    //     let jsonData = JSON.parse(JSON.stringify(exportedQuestionaire[activeSlide]));
+    //     let data  =JSON.parse(jsonData.json).ROOT;
+    //     jsonData.json=JSON.stringify(updateObject("background",code,JSON.parse(jsonData.json)))
 
+    // exportedQuestionaire[activeSlide]=jsonData
+    // console.log("jsonData",jsonData)
+    //     console.log(exportedQuestionaire);
+    //     setRightItems(exportedQuestionaire);
+    // setProp((props) => (props.background = code), 500);
+    //     setTemplateData(UniqueIdGenerator("_id"))
+  }
   return (
     <Box>
       <Accordion>
@@ -57,7 +79,7 @@ export const Toolbox = () => {
             <Grid item xs={6}>
               <Box
                 ref={(ref) =>
-                  connectors.create(ref, <Text text="Enter Options" />)
+                  connectors.create(ref, <Option text="Enter Options" />)
                 }
                 variant="contained"
                 data-cy="toolbox-text"
@@ -159,7 +181,7 @@ export const Toolbox = () => {
                   cursor: "pointer",
                 }}
               >
-              <CardMembershipOutlinedIcon/>
+                <CardMembershipOutlinedIcon />
                 <span>Card</span>
               </Box>
             </Grid>
@@ -186,6 +208,45 @@ export const Toolbox = () => {
           </Grid>
         </AccordionDetails>
       </Accordion>
+      <ColorTheme/>
+     {/* <Accordion>
+        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+          <Typography>Add Themes</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Accordion>
+            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+              <Typography>Plain Theme</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid container spacing={2}>
+                {plainThemeColors.map((code) => (
+                  <Grid item xs={2}>
+                    <Box
+                      onClick={() => changeBackground(code)}
+                      variant="contained"
+                      data-cy="toolbox-text"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        width: "20px",
+                        height: "20px",
+                        borderRadius: "2px",
+                        backgroundColor: code,
+                        borderColor: "red",
+                        borderWidth: "3px",
+                      }}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
+        </AccordionDetails>
+                    </Accordion>*/}
     </Box>
   );
 };
