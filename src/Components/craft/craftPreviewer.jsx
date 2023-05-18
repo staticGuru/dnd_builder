@@ -14,6 +14,7 @@ import { Video } from "./components/user/Video";
 import { DocumentAttachment } from "./components/user/DocumentAttachment";
 import { SlideLists } from "../DndBuilder/SlideLists";
 import { DndState } from "../../context/DndProvider";
+import { Option } from "./components/user/Option";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -38,6 +39,7 @@ export function CraftPreviewer() {
           ImageContent,
           Video,
           DocumentAttachment,
+          Option
         }}
       >
         <Grid container spacing={2} style={{ paddingTop: "10px" }}>
