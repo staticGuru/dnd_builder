@@ -16,6 +16,7 @@ import { Option } from "./components/user/Option";
 import { SlideLists } from "../DndBuilder/SlideLists";
 import { DndState } from "../../context/DndProvider";
 import { UniqueIdGenerator } from "../../utils/UniqueIdGenerator";
+import {Audio} from "./components/user/Audio";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -58,6 +59,7 @@ export default function QuestionnaireEditor() {
           Video,
           DocumentAttachment,
           Option,
+          Audio
         }}
       >
         <Topbar />
@@ -86,7 +88,7 @@ export default function QuestionnaireEditor() {
                 canvas
                 is={Container}
                 padding={5}
-                background={themeArr.toString()}
+                background="#eeeeee"
                 data-cy="root-container"
               >
                 {/*<Card data-cy="frame-card" />
