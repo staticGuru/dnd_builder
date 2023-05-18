@@ -1,6 +1,6 @@
 import { Editor, Frame, Element } from "@craftjs/core";
 import { Typography, Paper, Grid, makeStyles, Box } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { SettingsPanel } from "./components/SettingsPanel";
 import { Toolbox } from "./components/Toolbox";
@@ -12,8 +12,10 @@ import { Container } from "./components/user/Container";
 import { Text } from "./components/user/Text";
 import { Video } from "./components/user/Video";
 import { DocumentAttachment } from "./components/user/DocumentAttachment";
+import { Option } from "./components/user/Option";
 import { SlideLists } from "../DndBuilder/SlideLists";
 import { DndState } from "../../context/DndProvider";
+import { UniqueIdGenerator } from "../../utils/UniqueIdGenerator";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,8 +25,25 @@ const useStyles = makeStyles(() => ({
 }));
 export default function QuestionnaireEditor() {
   const classes = useStyles();
-  const { isEditable, addSlide } = DndState();
-
+  const {
+    isEditable,
+    addSlide,
+    exportedQuestionaire,
+    activeSlide,
+    rightItems,
+    templateData,
+    themeArr,
+    setThemeArr
+  } = DndState();
+  let jsonData = exportedQuestionaire[activeSlide];
+  const [datas, setData] = useState(null);
+  let data = JSON.parse(jsonData.json)["ROOT"];
+  console.log("data", data,themeArr.toString());
+  // useEffect(() => {
+  //   let jsonData = exportedQuestionaire[activeSlide];
+  //   setData(JSON.parse(jsonData.json)["ROOT"].props.background);
+  //   console.log("datatatdafd",datas,JSON.parse(jsonData.json)["ROOT"].props.background)
+  // }, [exportedQuestionaire, activeSlide,rightItems,templateData]);
   return (
     <div style={{ width: "100%", marginTop: "6rem" }}>
       <Editor
@@ -38,6 +57,7 @@ export default function QuestionnaireEditor() {
           ImageContent,
           Video,
           DocumentAttachment,
+          Option,
         }}
       >
         <Topbar />
@@ -51,21 +71,22 @@ export default function QuestionnaireEditor() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-
                 }}
                 py={1}
               >
-                <Typography style={{fontWeight:"bold"}}>ADD NEW SLIDES</Typography>
+                <Typography style={{ fontWeight: "bold" }}>
+                  ADD NEW SLIDES
+                </Typography>
               </Box>
             </Paper>
           </Grid>
-          <Grid item xs>
+          <Grid item xs style={{'--background-color': "red"}}>
             <Frame>
               <Element
                 canvas
                 is={Container}
                 padding={5}
-                background="#eeeeee"
+                background={themeArr.toString()}
                 data-cy="root-container"
               >
                 {/*<Card data-cy="frame-card" />
@@ -90,7 +111,7 @@ export default function QuestionnaireEditor() {
           <Grid item xs={3}>
             <Paper className={classes.root}>
               <SettingsPanel />
-              {!isEditable && <SlideLists isPreviewScreen={false}/>}
+              {!isEditable && <SlideLists isPreviewScreen={false} />}
             </Paper>
           </Grid>
         </Grid>
