@@ -17,6 +17,9 @@ const Publish = () => {
       JSON.stringify(exportedQuestionaire);
     return URL;
   };
+  function handlePublish(){
+localStorage.setItem("publishList",JSON.stringify(exportedQuestionaire));
+  }
   return (
     <div className="container mt-5 shadow back p-5">
       <div className="row">
@@ -46,7 +49,7 @@ const Publish = () => {
                   ? "opacity-100"
                   : "opacity-50"
               }`}
-              onClick={() => setPublish(!publish)}
+              onClick={() => handlePublish()}
               disabled={exportedQuestionaire.flat().length ? false : true}
             >
               Publish
