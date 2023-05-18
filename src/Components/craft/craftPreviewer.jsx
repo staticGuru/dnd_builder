@@ -2,9 +2,7 @@ import { Editor, Frame, Element } from "@craftjs/core";
 import { Typography, Paper, Grid, makeStyles, Box } from "@material-ui/core";
 import React from "react";
 
-import { SettingsPanel } from "./components/SettingsPanel";
-import { Toolbox } from "./components/Toolbox";
-import { Topbar } from "./components/Topbar";
+
 import { Button } from "./components/user/Button";
 import { ImageContent } from "./components/user/ImageContent";
 import { Card, CardBottom, CardTop } from "./components/user/Card";
@@ -15,6 +13,7 @@ import { DocumentAttachment } from "./components/user/DocumentAttachment";
 import { SlideLists } from "../DndBuilder/SlideLists";
 import { DndState } from "../../context/DndProvider";
 import { Option } from "./components/user/Option";
+import {Audio} from "./components/user/Audio";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,7 +38,8 @@ export function CraftPreviewer() {
           ImageContent,
           Video,
           DocumentAttachment,
-          Option
+          Option,
+          Audio
         }}
       >
         <Grid container spacing={2} style={{ paddingTop: "10px" }}>
