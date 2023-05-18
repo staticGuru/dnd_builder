@@ -7,9 +7,9 @@ export function SlideLists({isPreviewScreen}) {
   const { actions } = useEditor();
   function changeActiveSlide(index) {
     setActiveSlide(index);
-    let JsonObj = exportedQuestionaire[index].json;
+    let JsonObj = exportedQuestionaire[index]?.json;
     console.log({ JsonObj });
-    actions.deserialize(JsonObj);
+    if(JsonObj)actions.deserialize(JsonObj);
   }
   useEffect(() => {
     if (isPreviewScreen) {

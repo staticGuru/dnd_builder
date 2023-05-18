@@ -2,12 +2,17 @@ import { useNode } from '@craftjs/core';
 import { Slider } from '@material-ui/core';
 import { Paper, FormControl, FormLabel } from '@material-ui/core';
 import ColorPicker from 'material-ui-color-picker';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { DndState } from '../../../../context/DndProvider';
 
 export const Container = ({ background, padding, children, ...props }) => {
   const {
     connectors: { connect, drag },
   } = useNode();
+  const {themeArr,exportedQuestionaire}=DndState();
+  useEffect(()=>{
+console.log("ThemeArrrr",themeArr,exportedQuestionaire)
+  },[themeArr,exportedQuestionaire])
   return (
     <Paper
       {...props}

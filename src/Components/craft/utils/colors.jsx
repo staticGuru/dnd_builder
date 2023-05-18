@@ -1,0 +1,1 @@
+export const plainThemeColors=["#025464","#E57C23","#DBDFAA","#73A9AD","#1B9C85","#F266AB"]

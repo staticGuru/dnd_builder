@@ -42,22 +42,45 @@ const items = [
   },
 ];
 
-const newItems = [
-  {
-    id: "#1",
-    craftJson: null,
-    page: 1,
+const json = JSON.stringify({
+  ROOT: {
+    type: { resolvedName: "Container" },
+    isCanvas: true,
+    props: {
+      background: "#eeeeee",
+      padding: 5,
+      "data-cy": "root-container",
+    },
+    displayName: "Container",
+    custom: {},
+    hidden: false,
+    nodes: [],
+    linkedNodes: {},
   },
-];
+});
+
 const DndProvider = ({ children }) => {
   const [leftItems, setLeftItems] = useState(items);
-  const [rightItems, setRightItems] = useState([{}]);
+  const [rightItems, setRightItems] = useState([
+    {
+      id: UniqueIdGenerator("dnd"),
+      json,
+      slide: 1,
+    },
+  ]);
   const [isEditable, setIsEditable] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [editableElement, setEditableElement] = useState({});
   const [templateData, setTemplateData] = useState({});
   const [isPublished, setIsPublished] = useState(false);
   const [currentQuestionaire, setCurrentQuestionaire] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [themeArr,setThemeArr]=useState("#025464");
+  let newItem = {
+    id: UniqueIdGenerator("dnd"),
+    json,
+    slide: rightItems.length,
+  };
 
   function updateElementProperty(updatedItem) {
     rightItems[activeSlide] = updatedItem;
@@ -77,22 +100,7 @@ const DndProvider = ({ children }) => {
   function addSlide() {
     let newItem = {
       id: UniqueIdGenerator("dnd"),
-      json: {
-        ROOT: {
-          type: { resolvedName: "Container" },
-          isCanvas: true,
-          props: {
-            background: "#eeeeee",
-            padding: 5,
-            "data-cy": "root-container",
-          },
-          displayName: "Container",
-          custom: {},
-          hidden: false,
-          nodes: [],
-          linkedNodes: {},
-        },
-      },
+      json,
       slide: rightItems.length,
     };
     rightItems.push(newItem);
@@ -124,6 +132,10 @@ const DndProvider = ({ children }) => {
         setIsPublished,
         currentQuestionaire,
         setCurrentQuestionaire,
+        currentQuestion,
+        setCurrentQuestion,
+        themeArr,
+        setThemeArr
       }}
     >
       {children}
