@@ -16,7 +16,10 @@ import { Option } from "./components/user/Option";
 import { SlideLists } from "../DndBuilder/SlideLists";
 import { DndState } from "../../context/DndProvider";
 import { UniqueIdGenerator } from "../../utils/UniqueIdGenerator";
-import {Audio} from "./components/user/Audio";
+import { Audio } from "./components/user/Audio";
+import { OneColumn } from "./components/Layout/oneColumn";
+import { TwoColumn } from "./components/Layout/twoColumn";
+import { ThreeColumn } from "./components/Layout/threeColumn";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,12 +37,12 @@ export default function QuestionnaireEditor() {
     rightItems,
     templateData,
     themeArr,
-    setThemeArr
+    setThemeArr,
   } = DndState();
   let jsonData = exportedQuestionaire[activeSlide];
   const [datas, setData] = useState(null);
   let data = JSON.parse(jsonData.json)["ROOT"];
-  console.log("data", data,themeArr.toString());
+  console.log("data", data, themeArr.toString());
   // useEffect(() => {
   //   let jsonData = exportedQuestionaire[activeSlide];
   //   setData(JSON.parse(jsonData.json)["ROOT"].props.background);
@@ -59,7 +62,10 @@ export default function QuestionnaireEditor() {
           Video,
           DocumentAttachment,
           Option,
-          Audio
+          Audio,
+          OneColumn,
+          TwoColumn,
+          ThreeColumn,
         }}
       >
         <Topbar />
@@ -82,7 +88,7 @@ export default function QuestionnaireEditor() {
               </Box>
             </Paper>
           </Grid>
-          <Grid item xs style={{'--background-color': "red"}}>
+          <Grid item xs style={{ "--background-color": "red" }}>
             <Frame>
               <Element
                 canvas
