@@ -1,10 +1,10 @@
 import { useEditor, useNode } from "@craftjs/core";
-import { Slider, FormControl, FormLabel, Box, Button } from "@material-ui/core";
+import { Slider, FormControl, FormLabel, Box, Button, RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import ContentEditable from "react-contenteditable";
 import { DndState } from "../../../../context/DndProvider";
 
-export const Option = ({ text, fontSize, textAlign, ...props }) => {
+export const Option = ({ text, fontSize, textAlign,fontStyle,fontWeight, ...props }) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -65,7 +65,8 @@ function handleClickAction(){
       disableElevation
     >
   {/* bg-white/5*/}
-      <div className={`py-1 pl-2 pr-2 m-2 border-2 cursor-pointer  ${isClicked?"border-green-800 bg-green-300":"border-gray-400 bg-white/5"} rounded-xl w-fit justify-center`}>
+      <div className={`py-1 pl-2 pr-2 m-2 border-2 cursor-pointer  ${isClicked?"border-green-800 bg-green-300":"border-gray-400 bg-white/5"} rounded-xl w-fit justify-center`} 
+      style={{fontStyle,fontWeight}}>
         <ContentEditable
           html={text}
           disabled={!editable}
@@ -123,6 +124,42 @@ const OptionSettings = () => {
             }
           />
         </Box>
+        <FormLabel component="legend">Property</FormLabel>
+        <RadioGroup
+          defaultValue="normal"
+          onChange={(e) => setProp((props) => (props.fontStyle = e.target.value))}
+        >
+        <FormControlLabel
+        label="Italic"
+        value="italic"
+        control={<Radio size="small" color="primary" />}
+      />
+      <FormControlLabel
+            label="Regular"
+            value="normal"
+            control={<Radio size="small" color="primary" />}
+          />
+          </RadioGroup>
+          <RadioGroup
+          defaultValue="normal"
+          onChange={(e) => setProp((props) => (props.fontWeight = e.target.value))}
+        >
+          <FormControlLabel
+            label="Bold"
+            value="bold"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Medium"
+            value="lighter"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Thin"
+            value="normal"
+            control={<Radio size="small" color="primary" />}
+          />
+          </RadioGroup>
       </FormControl>
     </>
   );
@@ -132,7 +169,9 @@ export const OptionDefaultProps = {
   text: "Hi",
   fontSize: 20,
   checked:false,
-  isClicked:false
+  isClicked:false,
+  fontStyle:"normal",
+  fontWeight:"normal"
 };
 
 Option.craft = {
