@@ -1,27 +1,43 @@
-import { useNode } from '@craftjs/core';
-import { Slider } from '@material-ui/core';
-import { Paper, FormControl, FormLabel } from '@material-ui/core';
-import ColorPicker from 'material-ui-color-picker';
-import React, { useEffect } from 'react';
-import { DndState } from '../../../../context/DndProvider';
+import { useNode } from "@craftjs/core";
+import { Box, Slider } from "@material-ui/core";
+import { Paper, FormControl, FormLabel } from "@material-ui/core";
+import ColorPicker from "material-ui-color-picker";
+import React, { useEffect } from "react";
+import { DndState } from "../../../../context/DndProvider";
 
-export const Container = ({ background, padding, children, ...props }) => {
+export const Container = ({
+  background,
+  padding,
+  children,
+  typeOfColumn = 1,
+  ...props
+}) => {
   const {
     connectors: { connect, drag },
   } = useNode();
-  const {themeArr,exportedQuestionaire}=DndState();
-  useEffect(()=>{
-console.log("ThemeArrrr",themeArr,exportedQuestionaire)
-  },[themeArr,exportedQuestionaire])
-  return (
-    <Paper
-      {...props}
-      ref={(ref) => connect(drag(ref))}
-      style={{ margin: '5px 0', background, padding: `${padding}px`,minHeight:"10rem" }}
-    >
-      {children}
-    </Paper>
-  );
+  const { themeArr, exportedQuestionaire } = DndState();
+  useEffect(() => {
+    console.log("ThemeArrrr", themeArr, exportedQuestionaire);
+  }, [themeArr, exportedQuestionaire]);
+  // return new Array(typeOfColumn).fill("E").map((e, index) => {
+    return (
+      <Paper
+        key={"index"}
+        {...props}
+        ref={(ref) => connect(drag(ref))}
+        style={{
+          margin: "5px 0",
+          background,
+          padding: `${padding}px`,
+          minHeight: "10rem",
+          display:"flex",
+          flex:1
+        }}
+      >
+        {children}
+      </Paper>
+    );
+  // });
 };
 
 export const ContainerSettings = () => {
@@ -60,8 +76,9 @@ export const ContainerSettings = () => {
 };
 
 export const ContainerDefaultProps = {
-  background: '#ffffff',
+  background: "#ffffff",
   padding: 3,
+  typeOfColumn: 1,
 };
 
 Container.craft = {
