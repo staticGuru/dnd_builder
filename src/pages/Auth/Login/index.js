@@ -9,9 +9,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { login } from "../../services/API";
-import useAuth from "../../hooks/useAuth";
+import {login} from "../../../services/API"
 // import CircularProgress from '@mui/material/CircularProgress';
+import useAuth from "../../../hooks/useAuth";
 
 
 
@@ -43,7 +43,7 @@ const LoginFile = () => {
              var result=response.data.result;
           setAuth({...result})
           localStorage.setItem("user",JSON.stringify(result));
-        navigate("/home",{replace:true});
+        navigate("/Editor",{replace:true});
       }
        else {
         setTextInputError("User Id or Password is incorrect");
