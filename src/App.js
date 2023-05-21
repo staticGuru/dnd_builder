@@ -1,16 +1,18 @@
-
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import CreateNewTemplate from './Components/CreateNewTemplate';
-import './Components/style.css';
-import DndProvider from './context/DndProvider';
+import "./App.css";
+import CreateNewTemplate from "./Components/CreateNewTemplate";
+import "./Components/style.css";
+import DndProvider from "./context/DndProvider";
+import { AuthProvider } from "./context/Authprovider";
+import AppRouter from "./routes";
 
 function App() {
   return (
     <>
-    <DndProvider>
-      <CreateNewTemplate />
-      </DndProvider>
+      <AuthProvider>
+        <DndProvider>
+          <AppRouter />
+        </DndProvider>
+      </AuthProvider>
     </>
   );
 }

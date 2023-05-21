@@ -1,9 +1,16 @@
-import { useNode } from '@craftjs/core';
-import { Slider, FormControl, FormLabel } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
-import ContentEditable from 'react-contenteditable';
+import { useNode } from "@craftjs/core";
+import {
+  Slider,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import ContentEditable from "react-contenteditable";
 
-export const Text = ({ text, fontSize, textAlign, ...props }) => {
+export const Text = ({ text, fontSize, textAlign,fontStyle, ...props }) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -28,7 +35,7 @@ export const Text = ({ text, fontSize, textAlign, ...props }) => {
       {...props}
       ref={(ref) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
-      style={{width:"fit-content"}}
+      style={{ width: "fit-content",fontStyle}}
     >
       <ContentEditable
         html={text}
@@ -36,12 +43,12 @@ export const Text = ({ text, fontSize, textAlign, ...props }) => {
         onChange={(e) =>
           setProp(
             (props) =>
-              (props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, '')),
+              (props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, "")),
             500
           )
         }
         tagName="p"
-        style={{ fontSize: `${fontSize}px`, textAlign,outline:"none" }}
+        style={{ fontSize: `${fontSize}px`, textAlign, outline: "none" }}
       />
     </div>
   );
@@ -69,14 +76,46 @@ const TextSettings = () => {
             setProp((props) => (props.fontSize = value), 1000);
           }}
         />
+        <FormLabel component="legend">Property</FormLabel>
+        <RadioGroup
+          defaultValue="small"
+          onChange={(e) => setProp((props) => (props.fontStyle = e.target.value))}
+        >
+          <FormControlLabel
+            label="Bold"
+            value="small"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Medium"
+            value="medium"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Italic"
+            value="italic"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Underline"
+            value="large"
+            control={<Radio size="small" color="primary" />}
+          />
+          <FormControlLabel
+            label="Regular"
+            value="normal"
+            control={<Radio size="small" color="primary" />}
+          />
+        </RadioGroup>
       </FormControl>
     </>
   );
 };
 
 export const TextDefaultProps = {
-  text: 'Hi',
+  text: "Hi",
   fontSize: 20,
+  fontStyle:"normal"
 };
 
 Text.craft = {
