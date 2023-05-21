@@ -13,7 +13,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { signup } from "../../services/API";
+import { signup } from "../../../services/API";
 import * as Yup from "yup";
 
 const SignUp = () => {
