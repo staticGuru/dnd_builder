@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Summary from "./Summary";
@@ -88,21 +88,7 @@ const CreateNewTemplate = () => {
               </li>
             </ul>
 
-            <Routes>
-              <Route exact path="/Editor" element={<QuestionnaireEditor />} />
-              <Route exact path="/Preview" element={<CraftPreviewer />} />
-              <Route exact path="/Define" element={<Define />} />
-              <Route exact path="/Summary" element={<Summary />} />
-              <Route exact path="/Publish" element={<Publish />} />
-              <Route
-                exact
-                path="/MasterTemplates"
-                element={<MasterTemplates />}
-              />
-              <Route exact path="/DisplayPages" element={<DisplayPages />} />
-              <Route exact path="/Page1" element={<Page1 />} />
-              <Route exact path="/Page2" element={<Page2 />} />
-            </Routes>
+            <Outlet/>
           </div>
         </div>
       )}
