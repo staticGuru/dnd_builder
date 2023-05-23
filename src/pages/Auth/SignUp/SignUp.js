@@ -79,6 +79,13 @@ console.log("response",response)
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box className={classes.mainContainer}>
+      <Box className={classes.subContainerRight}>
+          <img
+            style={{ width: "45rem", height: "50rem" }}
+            alt="#"
+            src="https://static.cdprojektred.com/cms.cdprojektred.com/16x9_big/872822c5e50dc71f345416098d29fc3ae5cd26c1-1920x1080.jpg"
+            />
+        </Box>
         <Box className={classes.subContainerLeft}>
           <Box className={classes.middleContainer}>
             <Box className={classes.header}>
@@ -414,12 +421,7 @@ console.log("response",response)
             </Box>
           </Box>
         </Box>
-        <Box className={classes.subContainerRight}>
-          <img
-            style={{ width: "45rem", height: "50rem" }}
-            src="/pictureWeb.png"
-          />
-        </Box>
+        
       </Box>
     </form>
   );
