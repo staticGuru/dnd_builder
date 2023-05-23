@@ -9,7 +9,7 @@
   width: 45rem;
   /* background-color: green; */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .subContainerRight {
