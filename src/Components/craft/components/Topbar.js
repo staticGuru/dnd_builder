@@ -17,6 +17,7 @@ import copy from "copy-to-clipboard";
 import React, { useState } from "react";
 import { DndState } from "../../../context/DndProvider";
 import { UniqueIdGenerator } from "../../../utils/UniqueIdGenerator";
+import useAuth from "../../../hooks/useAuth";
 
 export const Topbar = () => {
   const { actions, query, enabled, canUndo, canRedo } = useEditor(
@@ -26,7 +27,7 @@ export const Topbar = () => {
       canRedo: state.options.enabled && query.history.canRedo(),
     })
   );
-
+  const { setAuth } = useAuth();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState();
   const { activeSlide, updateElementProperty, addSlide } = DndState();
@@ -44,6 +45,10 @@ export const Topbar = () => {
     }
     actions.clearEvents();
     addSlide();
+  }
+  function logoutCallback(){
+    localStorage.removeItem("user");
+    setAuth({});
   }
   return (
     <Box px={1} py={1} mt={3} mb={1} bgcolor="#cbe8e7">
@@ -107,8 +112,18 @@ export const Topbar = () => {
             variant="outlined"
             color="secondary"
             onClick={() => setDialogOpen(true)}
+            style={{ marginRight: "10px" }}
           >
             Load
+          </MaterialButton>
+          <MaterialButton
+            className="load-state-btn"
+            size="small"
+            variant="outlined"
+            color="secondary"
+            onClick={()=>logoutCallback()}
+          >
+            Logout
           </MaterialButton>
           <Dialog
             open={dialogOpen}
