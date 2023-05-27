@@ -12,6 +12,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { DndState } from "../../../../context/DndProvider";
 import { UniqueIdGenerator } from "../../../../utils/UniqueIdGenerator";
 import { useEditor, useNode } from "@craftjs/core";
+import { Colors } from "../../../../utils/Colors";
 
 function ColorTheme() {
   const { exportedQuestionaire, activeSlide, setRightItems, setTemplateData,themeArr, setThemeArr } =
@@ -56,8 +57,8 @@ function ColorTheme() {
   }
 
   return (
-    <Accordion>
-      <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+    <Accordion style={{ backgroundColor: Colors.primary, color:"white" }}>
+      <AccordionSummary expandIcon={<ArrowDropDownIcon style={{color:"white"}}/>}>
         <Typography>Add Themes</Typography>
       </AccordionSummary>
       <AccordionDetails>

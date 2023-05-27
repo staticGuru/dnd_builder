@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import LoginFile from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp/SignUp";
 import { Navigate } from "react-router-dom";
@@ -10,7 +10,12 @@ import Layout from "../Components/Layout";
 import QuestionnaireEditor from "../Components/craft/QuestionnaireEditor";
 import { CraftPreviewer } from "../Components/craft/craftPreviewer";
 import Define from "../Components/Define";
-        {/*<Route exact path="/forgotpassword" element={<ForgotPassword />} />*/}
+import { Publisher } from "../Components/Publisher";
+import Summary from "../Components/Summary";
+import Publish from "../Components/Publish";
+{
+  /*<Route exact path="/forgotpassword" element={<ForgotPassword />} />*/
+}
 
 function PublicRoutes() {
   return (
@@ -18,20 +23,24 @@ function PublicRoutes() {
       <Route element={<PublicAuth />}>
         <Route exact path="/login" element={<LoginFile />} />
         <Route exact path="/signup" element={<SignUp />} />
-     <Route path="/" element={<Navigate replace to="/login" />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
       </Route>
       <Route element={<RequireAuth allowedRoles={[]} />}>
-  <Route element={<CreateNewTemplate />}>
+        <Route element={<CreateNewTemplate />}>
           <Route exact path="/Editor" element={<QuestionnaireEditor />} />
           <Route exact path="/Preview" element={<CraftPreviewer />} />
           <Route exact path="/Define" element={<Define />} />
+          <Route exact path="/Summary" element={<Summary />} />
+          <Route exact path="/Publish" element={<Publish />} />
+          <Route exact path="/answers/:qNo" element={<Publisher />} />
         </Route>
       </Route>
-  </Routes>
+    </Routes>
   );
 }
 export default PublicRoutes;
- {/* <Route exact path="/Summary" element={<Summary />} />
+{
+  /* <Route exact path="/Summary" element={<Summary />} />
               <Route exact path="/Publish" element={<Publish />} />
               <Route
                 exact
@@ -40,4 +49,5 @@ export default PublicRoutes;
               />
               <Route exact path="/DisplayPages" element={<DisplayPages />} />
               <Route exact path="/Page1" element={<Page1 />} />
-  <Route exact path="/Page2" element={<Page2 />} />*/}
+  <Route exact path="/Page2" element={<Page2 />} />*/
+}
