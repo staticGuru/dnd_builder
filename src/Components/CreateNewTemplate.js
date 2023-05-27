@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Summary from "./Summary";
@@ -17,30 +17,60 @@ import { Publisher } from "./Publisher";
 import { DndState } from "../context/DndProvider";
 import QuestionnaireEditor from "./craft/QuestionnaireEditor";
 import { CraftPreviewer } from "./craft/craftPreviewer";
+import { Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import { Colors } from "../utils/Colors";
 
 const CreateNewTemplate = () => {
-  const { setIsPublished, isPublished,setCurrentQuestionaire } = DndState();
+  const { setIsPublished, isPublished, setCurrentQuestionaire } = DndState();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-
-  useEffect(() => {
-    let text = urlParams.get("qu");
-    if (text) {
-      setCurrentQuestionaire(text)
-      setIsPublished(true);
-    } else {
-      setCurrentQuestionaire("")
-      setIsPublished(false);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: Colors.primary,
+    cursor:"pointer",
+    fontWeight:"bold",
+    "&:hover":{
+      backgroundColor:Colors.primary,
+      color:"white"
     }
+  }));
+  const navigation=useNavigate()
+  useEffect(() => {
+    // let text = urlParams.get("qu");
+    // if (text) {
+    //   setCurrentQuestionaire(text);
+    //   setIsPublished(true);
+    // } else {
+    //   setCurrentQuestionaire("");
+    //   setIsPublished(false);
+    // }
   }, [urlParams]);
   return (
     <div className="container mt-1">
-      {!isPublished && (
+      {true && (
         <div className="row">
-          <div className="col-lg-2 Box"></div>
-          <div className="col-lg-10">
+          <div className="col-lg-12">
             <Navbar />
-            <ul className="step-menu mt-4">
+            <Grid container spacing={2}>
+              <Grid item xs={3}>
+                <Item>1. Component</Item>
+              </Grid>
+              <Grid item xs={3}>
+                <Item>2. Classify</Item>
+              </Grid>
+              <Grid item xs={3}>
+                <Item onClick={()=>navigation("/answers/1")}>3. Content</Item>
+              </Grid>
+              <Grid item xs={3}>
+                <Item><div onClick={()=>navigation("/publish")}>4. Configure</div></Item>
+              </Grid>
+            </Grid>
+            {/* <ul className="step-menu mt-4">
               <li className="complete">
                 <Link
                   className="nav-link active text-dark arrow-pointer"
@@ -86,17 +116,12 @@ const CreateNewTemplate = () => {
                   Publish
                 </Link>
               </li>
-            </ul>
+      </ul>*/}
 
-            <Outlet/>
+            <Outlet />
           </div>
         </div>
       )}
-      <div className="row">
-        <Routes>
-          <Route exact path="/answers/:jsonNo" element={<Publisher />} />
-        </Routes>
-      </div>
     </div>
   );
 };
