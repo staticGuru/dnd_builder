@@ -16,7 +16,7 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
 import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
 import CardMembershipOutlinedIcon from "@mui/icons-material/CardMembershipOutlined";
-import GraphicEqOutlinedIcon from '@mui/icons-material/GraphicEqOutlined';
+import GraphicEqOutlinedIcon from "@mui/icons-material/GraphicEqOutlined";
 import { Button } from "./user/Button";
 import { Card } from "./user/Card";
 import { Container } from "./user/Container";
@@ -30,10 +30,11 @@ import ColorTheme from "./ToolItems/Theme";
 import { DndState } from "../../../context/DndProvider";
 import { Audio } from "./user/Audio";
 import { LayoutComponent } from "./Layout";
+import { Colors } from "../../../utils/Colors";
 
 export const Toolbox = () => {
   const { connectors } = useEditor();
-  const { themeArr, setThemeArr, activeSlide,rightItems } = DndState();
+  const { themeArr, setThemeArr, activeSlide, rightItems } = DndState();
   // const {
   //   actions: { setProp },
   // } = useNode();
@@ -44,7 +45,6 @@ export const Toolbox = () => {
     //     let jsonData = JSON.parse(JSON.stringify(exportedQuestionaire[activeSlide]));
     //     let data  =JSON.parse(jsonData.json).ROOT;
     //     jsonData.json=JSON.stringify(updateObject("background",code,JSON.parse(jsonData.json)))
-
     // exportedQuestionaire[activeSlide]=jsonData
     // console.log("jsonData",jsonData)
     //     console.log(exportedQuestionaire);
@@ -54,8 +54,8 @@ export const Toolbox = () => {
   }
   return (
     <Box>
-      <Accordion>
-        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+      <Accordion style={{ backgroundColor: Colors.primary, color:"white" }}>
+        <AccordionSummary expandIcon={<ArrowDropDownIcon  style={{color:"white"}}/>}>
           <Typography>Add Content</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -133,22 +133,22 @@ export const Toolbox = () => {
               </Box>
             </Grid>
             <Grid item xs={6}>
-            <Box
-              ref={(ref) => connectors.create(ref, <Audio />)}
-              variant="contained"
-              data-cy="toolbox-text"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-              }}
-            >
-              <GraphicEqOutlinedIcon />
-              <span>Audio</span>
-            </Box>
-          </Grid>
+              <Box
+                ref={(ref) => connectors.create(ref, <Audio />)}
+                variant="contained"
+                data-cy="toolbox-text"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <GraphicEqOutlinedIcon />
+                <span>Audio</span>
+              </Box>
+            </Grid>
             <Grid item xs={6}>
               <Box
                 ref={(ref) => connectors.create(ref, <DocumentAttachment />)}
@@ -208,8 +208,8 @@ export const Toolbox = () => {
           </Grid>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+      <Accordion style={{ backgroundColor: Colors.primary, color:"white" }}>
+        <AccordionSummary expandIcon={<ArrowDropDownIcon style={{color:"white"}}/>}>
           <Typography>Add Action Items</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -228,9 +228,9 @@ export const Toolbox = () => {
           </Grid>
         </AccordionDetails>
       </Accordion>
-      <ColorTheme/>
+      <ColorTheme />
       <LayoutComponent />
-     {/* <Accordion>
+      {/* <Accordion>
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
           <Typography>Add Themes</Typography>
         </AccordionSummary>

@@ -20,11 +20,13 @@ import { Audio } from "./components/user/Audio";
 import { OneColumn } from "./components/Layout/oneColumn";
 import { TwoColumn } from "./components/Layout/twoColumn";
 import { ThreeColumn } from "./components/Layout/threeColumn";
+import { Colors } from "../../utils/Colors";
 
 const useStyles = makeStyles(() => ({
   root: {
     padding: 0,
-    background: "rgb(252, 253, 253)",
+    background: Colors.primary,
+    color:"white"
   },
 }));
 export default function QuestionnaireEditor() {
@@ -49,7 +51,7 @@ export default function QuestionnaireEditor() {
   //   console.log("datatatdafd",datas,JSON.parse(jsonData.json)["ROOT"].props.background)
   // }, [exportedQuestionaire, activeSlide,rightItems,templateData]);
   return (
-    <div style={{ width: "100%", marginTop: "6rem" }}>
+    <div style={{ width: "100%" }}>
       <Editor
         resolver={{
           Card,
@@ -69,8 +71,8 @@ export default function QuestionnaireEditor() {
         }}
       >
         <Topbar />
-        <Grid container spacing={5} style={{ paddingTop: "10px" }}>
-          <Grid item xs={3}>
+        <Grid container spacing={1} style={{backgroundColor:"#6C9BCF",marginTop:"15px" }}>
+          <Grid item xs={2}>
             <Paper className={classes.root}>
               <Toolbox />
               <Box
@@ -96,6 +98,8 @@ export default function QuestionnaireEditor() {
                 padding={5}
                 background="#eeeeee"
                 data-cy="root-container"
+                style={{backgroundColor:"red"}}
+                height="30rem"
               >
                 {/*<Card data-cy="frame-card" />
                 <Button text="Click me" size="small" data-cy="frame-button" />
@@ -116,7 +120,7 @@ export default function QuestionnaireEditor() {
               </Element>
             </Frame>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Paper className={classes.root}>
               <SettingsPanel />
               {!isEditable && <SlideLists isPreviewScreen={false} />}
