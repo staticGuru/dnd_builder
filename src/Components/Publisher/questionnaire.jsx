@@ -62,17 +62,21 @@ export function Questionnaire({ data,storeData}) {
             </Frame>
           </Grid>
         </Grid>
-        {currentQuestion === storeData.length - 1 && (
-          <SubmitComponent />
-        )}
+       
       </Editor>
+      {currentQuestion === storeData.length - 1 && (
+        <SubmitComponent />
+      )}
+      <Box className="flex flex-row">
       {currentQuestion != 0 && (
-        <Box onClick={() => setCurrentQuestion(currentQuestion - 1)}>
+        <Box className="bg-blue-400 pl-5 pr-5 pt-2 pb-2 text-white rounded-sm" onClick={() => setCurrentQuestion(currentQuestion - 1)}>
           Preview Question
         </Box>
       )}
-      <Box onClick={() => setCurrentQuestion(currentQuestion + 1)}>
+     
+      <Box className="bg-blue-400 pl-5 pr-5 pt-2 pb-2 text-white rounded-sm" onClick={() => setCurrentQuestion(currentQuestion + 1)}>
         Next Question
+      </Box>
       </Box>
     </Box>
   );

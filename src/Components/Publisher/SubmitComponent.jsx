@@ -3,10 +3,10 @@ import { Box } from '@material-ui/core'
 import React from 'react'
 
 export function SubmitComponent() {
-     const { query } = useEditor();
+   //   const { query } = useEditor();
      function submitHandler(){
-          let data=query.serialize();
-          console.log("submitDataaa",JSON.parse(data));
+         //  let data=query.serialize();
+         //  console.log("submitDataaa",JSON.parse(data));
 
      }
   return (
