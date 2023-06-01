@@ -10,6 +10,7 @@ export const Container = ({
   padding,
   children,
   typeOfColumn = 1,
+  height="10rem",
   ...props
 }) => {
   const {
@@ -22,7 +23,6 @@ export const Container = ({
   // return new Array(typeOfColumn).fill("E").map((e, index) => {
     return (
       <Paper
-        key={"index"}
         {...props}
         ref={(ref) => connect(drag(ref))}
         style={{
@@ -30,8 +30,9 @@ export const Container = ({
           background,
           padding: `${padding}px`,
           minHeight: "10rem",
-          display:"flex",
-          flex:1
+          // display:"flex",
+          // flex:1,
+          height
         }}
       >
         {children}

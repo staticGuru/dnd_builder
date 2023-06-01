@@ -18,8 +18,29 @@ import React, { useState } from "react";
 import { DndState } from "../../../context/DndProvider";
 import { UniqueIdGenerator } from "../../../utils/UniqueIdGenerator";
 import useAuth from "../../../hooks/useAuth";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { Colors } from "../../../utils/Colors";
+import Modal from "@mui/material/Modal";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Typography from "@mui/material/Typography";
+import { CraftPreviewer } from "../craftPreviewer";
 
 export const Topbar = () => {
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "98%",
+    height: "98%",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   const { actions, query, enabled, canUndo, canRedo } = useEditor(
     (state, query) => ({
       enabled: state.options.enabled,
@@ -37,7 +58,7 @@ export const Topbar = () => {
     let item = { id: UniqueIdGenerator("dnd"), json, slide: activeSlide };
     updateElementProperty(item);
     let Obj = JSON.parse(json);
-    console.log(Obj)
+    console.log(Obj);
     for (const [key] of Object.entries(Obj)) {
       if (key !== "ROOT") {
         actions.delete(key);
@@ -46,15 +67,82 @@ export const Topbar = () => {
     actions.clearEvents();
     addSlide();
   }
-  function logoutCallback(){
+  function logoutCallback() {
     localStorage.removeItem("user");
     setAuth({});
   }
+  function handleDeleteActions(query) {
+    const json = query.serialize();
+    let Obj = JSON.parse(json);
+    console.log(Obj);
+    for (const [key] of Object.entries(Obj)) {
+      if (key !== "ROOT") {
+        actions.delete(key);
+      }
+    }
+    actions.clearEvents();
+  }
+  function handleFullScreen() {
+    setOpen(true);
+  }
   return (
-    <Box px={1} py={1} mt={3} mb={1} bgcolor="#cbe8e7">
+    <Box px={1} py={1} mt={3} mb={1}>
       <Grid container alignItems="center">
         <Grid item xs>
-          <FormControlLabel
+          <MaterialButton
+            className="copy-state-btn"
+            size="small"
+            variant="outlined"
+            color="white"
+            disabled={!canRedo}
+            onClick={() => actions.history.redo()}
+            style={{
+              marginRight: "10px",
+              backgroundColor: Colors.primary,
+              color: "white",
+              fontWeight: "bold",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            }}
+          >
+            Preview
+          </MaterialButton>
+          <MaterialButton
+            className="copy-state-btn"
+            size="small"
+            variant="outlined"
+            color="white"
+            onClick={() => handleFullScreen()}
+            style={{
+              marginRight: "10px",
+              backgroundColor: "transparent",
+              borderColor: Colors.primary,
+              borderWidth: "2px",
+              color: Colors.primary,
+              fontWeight: "bold",
+            }}
+          >
+            <FullscreenIcon />
+          </MaterialButton>
+          <MaterialButton
+            className="copy-state-btn"
+            size="small"
+            variant="outlined"
+            color="white"
+            onClick={() => handleDeleteActions(query)}
+            style={{
+              marginRight: "10px",
+              backgroundColor: "transparent",
+              borderColor: Colors.primary,
+              borderWidth: "2px",
+              color: Colors.primary,
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            <DeleteOutlineIcon />
+          </MaterialButton>
+          {/* <FormControlLabel
             className="enable-disable-toggle"
             control={
               <Switch
@@ -87,7 +175,7 @@ export const Topbar = () => {
             style={{ marginRight: "10px" }}
           >
             Redo
-          </MaterialButton>
+          </MaterialButton>*/}
         </Grid>
         <Grid item>
           <MaterialButton
@@ -104,9 +192,9 @@ export const Topbar = () => {
             }}
             style={{ marginRight: "10px" }}
           >
-            Copy current state
+            Save
           </MaterialButton>
-          <MaterialButton
+          {/* <MaterialButton
             className="load-state-btn"
             size="small"
             variant="outlined"
@@ -115,13 +203,13 @@ export const Topbar = () => {
             style={{ marginRight: "10px" }}
           >
             Load
-          </MaterialButton>
+          </MaterialButton>*/}
           <MaterialButton
             className="load-state-btn"
             size="small"
             variant="outlined"
             color="secondary"
-            onClick={()=>logoutCallback()}
+            onClick={() => logoutCallback()}
           >
             Logout
           </MaterialButton>
@@ -176,6 +264,20 @@ export const Topbar = () => {
           />
         </Grid>
       </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <HighlightOffIcon
+            style={{ position: "absolute", top: "10px", right: "10px",cursor:"pointer" }}
+            onClick={handleClose}
+          />
+          <CraftPreviewer/>
+        </Box>
+      </Modal>
     </Box>
   );
 };
