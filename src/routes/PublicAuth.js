@@ -7,7 +7,7 @@ const PublicAuth = () => {
     console.log("publicRoutes",auth);
     return (
        auth?.accessToken
-                ?<Navigate to="/Editor" state={{ from: location }} replace />
+                ?<Navigate to="/home" state={{ from: location }} replace />
                 : <Outlet />
     );
 }
