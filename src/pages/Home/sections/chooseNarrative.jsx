@@ -115,6 +115,23 @@ export function ContentArea({ selectedNarrative, setSelectedNarrative }) {
 }
 export function ChoosedDescription({ selectedNarrative }) {
   console.log("selectedNarrative", selectedNarrative);
+  function handleOptions() {
+    console.log("calleddd", document.getElementById("selectionModal"));
+    return React.createPortal(
+      <div
+        style={{
+          backgroundColor: "red",
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          height: "400px",
+        }}
+      >
+        Callbacks
+      </div>,
+      document.getElementById("selectionModal")
+    );
+  }
   return (
     <Box
       className="flex flex-col items-center border-gray-100 rounded-sm border-2"
@@ -155,6 +172,7 @@ export function ChoosedDescription({ selectedNarrative }) {
           fontWeight: "bold",
         }}
         className="my-2"
+        onClick={handleOptions}
       >
         CHOOSE AND PROCEED
       </Button>
