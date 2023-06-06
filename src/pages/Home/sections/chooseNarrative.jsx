@@ -6,6 +6,7 @@ import { Colors } from "../../../utils/Colors";
 import { NarrativeLists } from "../../../utils/NarrativeList";
 import { Pagination } from "@mui/material";
 import usePagination from "../../../hooks/usePagination";
+import Modal from "../../Modal/Modal";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -115,22 +116,25 @@ export function ContentArea({ selectedNarrative, setSelectedNarrative }) {
 }
 export function ChoosedDescription({ selectedNarrative }) {
   console.log("selectedNarrative", selectedNarrative);
+  const [show, setShow] = useState(false);
+
   function handleOptions() {
-    console.log("calleddd", document.getElementById("selectionModal"));
-    return React.createPortal(
-      <div
-        style={{
-          backgroundColor: "red",
-          position: "absolute",
-          top: "20px",
-          left: "20px",
-          height: "400px",
-        }}
-      >
-        Callbacks
-      </div>,
-      document.getElementById("selectionModal")
-    );
+    // console.log("calleddd", document.getElementById("selectionModal"));
+    setShow(true);
+    // return React.createPortal(
+    //   <div
+    //     style={{
+    //       backgroundColor: "red",
+    //       position: "absolute",
+    //       top: "20px",
+    //       left: "20px",
+    //       height: "400px",
+    //     }}
+    //   >
+    //     Callbacks
+    //   </div>,
+    //   document.getElementById("selectionModal")
+    // );
   }
   return (
     <Box
@@ -176,6 +180,9 @@ export function ChoosedDescription({ selectedNarrative }) {
       >
         CHOOSE AND PROCEED
       </Button>
+      <Modal title="My Modal" onClose={() => setShow(false)} show={show}>
+        <p>This is modal body</p>
+      </Modal>
     </Box>
   );
 }

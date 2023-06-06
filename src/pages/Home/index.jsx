@@ -12,6 +12,8 @@ function Home() {
       <Box>
         <MultiStepForm />
       </Box>
+      
+
     </Container>
   );
 }

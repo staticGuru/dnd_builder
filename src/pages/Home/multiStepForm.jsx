@@ -115,8 +115,7 @@ export default function MultiStepForm() {
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Box>
-          
-      <div id="selectionModal" />
+          <div id="selectionModal" />
         </React.Fragment>
       )}
     </Box>
