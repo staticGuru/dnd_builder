@@ -44,8 +44,8 @@ const Define = () => {
         //     })
     }
     return (
-        <div>
-            <div className='container mt-5 shadow back p-5'>
+      
+            <div className='container mt-1 p-2'>
                 <div className='row'>
                     <div className='col-lg-5'>
                         <h4 className='mt-3 vl font-header'>Define Template</h4>
@@ -119,7 +119,6 @@ const Define = () => {
                     </div>
                 </div>
             </div >
-        </div >
     )
 }
 export default Define;
